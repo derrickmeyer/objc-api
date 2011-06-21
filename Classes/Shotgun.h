@@ -41,7 +41,7 @@
  *
  * @section Installation
  *  <ul>
- *  <li>Start by downloading the code from https://github.com/robblau/objc-api</li>
+ *  <li>Start by downloading the code from https://github.com/shotgunsoftware/objc-api</li>
  *  <li>Copy the files in Classes directory into your project.</li>
  *  <li>Copy the dependencies into your project.\n\n
  *      All the dependencies are included as git submodules in the Dependencies directory.\n
@@ -201,7 +201,7 @@
  * @section Links
  * \li Python API: https://github.com/shotgunsoftware/python-api
  * \li Mailing List: https://groups.google.com/group/shotgun-objc-api
- * \li Issues: https://github.com/robblau/objc-api/issues
+ * \li Issues: https://github.com/shotgunsoftware/objc-api/issues
  *
  * Rob Blau <rblau@laika.com>
  *
