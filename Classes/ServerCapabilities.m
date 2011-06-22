@@ -53,9 +53,11 @@
 }
 
 -(void) ensureJSONSupported_ {
-    if ([(NSNumber *)[self.version objectAtIndex:0] unsignedIntegerValue] >= 2)
+    if ([(NSNumber *)[self.version objectAtIndex:0] unsignedIntegerValue] == 2)
         if ([(NSNumber *)[self.version objectAtIndex:1] unsignedIntegerValue] >= 4)
             return;
+    if ([(NSNumber *)[self.version objectAtIndex:0] unsignedIntegerValue] >= 3)
+        return;
     [NSException raise:@"Shotgun Error" 
                 format:@"JSON API requires server version 2.4 or higher, server is %@", self.version];
 }
