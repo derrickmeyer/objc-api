@@ -12,18 +12,12 @@
 @class ShotgunEntity;
 @class VersionTableViewCell;
 
-@interface DetailViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
-    Shotgun *shotgun;
-    NSArray *versions;
-    ShotgunEntity *_detailItem;
-    NSMutableDictionary *imageMap;
-    VersionTableViewCell *versCell;
-}
+@interface DetailViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>;
 
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, retain) ShotgunEntity *detailItem;
 @property (nonatomic, retain) IBOutlet UITableView *versionsTable;
-@property (nonatomic, assign) IBOutlet VersionTableViewCell *versCell;
-@property (readwrite, assign) Shotgun *shotgun;
+@property (nonatomic, retain) IBOutlet VersionTableViewCell *versCell;
+@property (nonatomic, retain) Shotgun *shotgun;
 
 @end

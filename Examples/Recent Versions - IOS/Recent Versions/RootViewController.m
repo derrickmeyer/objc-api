@@ -11,9 +11,18 @@
 
 #import "DetailViewController.h"
 
+@interface RootViewController ()
+
+@property (retain, readwrite, nonatomic) NSArray *projects;
+@property (retain, readwrite, nonatomic) Shotgun *shotgun;
+
+@end
+
 @implementation RootViewController
-		
-@synthesize detailViewController;
+
+@synthesize projects = projects_;
+@synthesize shotgun = shotgun_;
+@synthesize detailViewController = detailViewController_;
 
 - (void)viewDidLoad
 {
@@ -23,22 +32,21 @@
     
     // Load shotgun connection information from the config plist
     NSString *path = [[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"];
-    NSDictionary *config = [[[NSDictionary alloc] initWithContentsOfFile:path] autorelease];
+    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:path];
 
     // Create the shotgun connection
-    shotgun = [[[Shotgun alloc] initWithUrl:[config objectForKey:@"url"]
-                                 scriptName:[config objectForKey:@"script"] 
-                                     andKey:[config objectForKey:@"key"]] retain];
+    self.shotgun = [Shotgun shotgunWithUrl:[config objectForKey:@"url"]
+                           scriptName:[config objectForKey:@"script"] 
+                               andKey:[config objectForKey:@"key"]];
 
     // Share the connection with the detail controller
-    detailViewController.shotgun = shotgun;
+    self.detailViewController.shotgun = self.shotgun;
 
     // Pull down all the projects from the servers
-    projects = [[NSArray alloc] init];
-    ShotgunRequest *request = [shotgun findEntitiesOfType:@"Project" withFilters:@"[]" andFields:@"[\"name\", \"image\"]"];
+    self.projects = [NSArray array];
+    ShotgunRequest *request = [self.shotgun findEntitiesOfType:@"Project" withFilters:@"[]" andFields:@"[\"name\", \"image\"]"];
     [request setCompletionBlock:^{
-        [projects release];
-        projects = [[request response] retain];        
+        self.projects = [request response];        
         [[self tableView] reloadData];
     }];
     [request startAsynchronous];
@@ -77,7 +85,7 @@
 		
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [projects count];    		    		
+    return [self.projects count];    		    		
 }
 
 		
@@ -91,7 +99,7 @@
     }
 
     // Configure the cell.  Standard table cell with the name of the project and its thumbnail.
-    NSDictionary *project = [projects objectAtIndex:[indexPath row]];
+    NSDictionary *project = [self.projects objectAtIndex:[indexPath row]];
     [[cell textLabel] setText:[project objectForKey:@"name"]];
     if (![[project objectForKey:@"image"] isEqual:[NSNull null]]) {
         NSLog(@"Loading image at: '%@'", [project objectForKey:@"image"]);
@@ -106,8 +114,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Get selected project and tell the detail view
-    ShotgunEntity *project = [projects objectAtIndex:[indexPath row]];
-    [detailViewController setDetailItem:project];
+    ShotgunEntity *project = [self.projects objectAtIndex:[indexPath row]];
+    [self.detailViewController setDetailItem:project];
 }
 
 - (void)didReceiveMemoryWarning
@@ -120,9 +128,9 @@
 
 - (void)dealloc
 {
-    [detailViewController release];
-    [projects release];
-    [shotgun release];
+    self.detailViewController = Nil;
+    self.projects = Nil;
+    self.shotgun = Nil;
     [super dealloc];
 }
 

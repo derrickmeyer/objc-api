@@ -11,10 +11,7 @@
 @class Shotgun;
 @class DetailViewController;
 
-@interface RootViewController : UITableViewController {
-    NSArray *projects;
-    Shotgun *shotgun;
-}
+@interface RootViewController : UITableViewController;
 		
 @property (nonatomic, retain) IBOutlet DetailViewController *detailViewController;
 
