@@ -30,6 +30,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -70,11 +71,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>completionBlock
 : <a class="el" href="interface_shotgun_request.html#aac110c5fd0df54f3caca020d830df84e">ShotgunRequest</a>
 </li>
+<li>entityId
+: <a class="el" href="interface_shotgun_entity.html#ad0d9a488012066062fa6c4f7137ec21f">ShotgunEntity</a>
+</li>
+<li>entityType
+: <a class="el" href="interface_shotgun_entity.html#a729ad89492821607dbe65c36f88a7950">ShotgunEntity</a>
+</li>
 <li>error
 : <a class="el" href="interface_shotgun_request.html#ae7ad63f6797c300ccafb0f4caaa554e2">ShotgunRequest</a>
 </li>
 <li>failedBlock
 : <a class="el" href="interface_shotgun_request.html#a5479a78e839e6acc28ac165ee1bffd50">ShotgunRequest</a>
+</li>
+<li>isExecuting
+: <a class="el" href="interface_shotgun_request.html#ac31a84b4849474ab542af5336a14cfb9">ShotgunRequest</a>
+</li>
+<li>isFinished
+: <a class="el" href="interface_shotgun_request.html#a7cec0fca3cbf207ef8a30dcc3f71f6c4">ShotgunRequest</a>
 </li>
 <li>queue
 : <a class="el" href="interface_shotgun_request.html#a9cd1cf1d46491ab560cbaa9c2b9412e7">ShotgunRequest</a>
@@ -92,7 +105,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Properties</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -101,7 +114,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jun 21 2011 15:50:04 for Shotgun ObjC Api by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Jun 23 2011 18:12:30 for Shotgun ObjC Api by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -30,6 +30,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -60,92 +61,91 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">/Users/rblau/Desktop/Projects/objc-api/master/Classes/Shotgun.h</div>  </div>
 </div>
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">//</span>
+<a href="_shotgun_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">//</span>
 <a name="l00002"></a>00002 <span class="comment">//  Shotgun.h</span>
 <a name="l00003"></a>00003 <span class="comment">//  ShotgunApi</span>
 <a name="l00004"></a>00004 <span class="comment">//</span>
 <a name="l00005"></a>00005 <span class="comment">//  Created by Rob Blau on 6/8/11.</span>
 <a name="l00006"></a>00006 <span class="comment">//  Copyright 2011 Laika. All rights reserved.</span>
 <a name="l00007"></a>00007 <span class="comment">//</span>
-<a name="l00008"></a>00008 
-<a name="l00009"></a>00009 <span class="preprocessor">#pragma mark - Main Page Documentation</span>
-<a name="l00010"></a>00010 <span class="preprocessor"></span>
-<a name="l00210"></a>00210 <span class="preprocessor">#pragma mark - Interface</span>
-<a name="l00211"></a>00211 <span class="preprocessor"></span>
-<a name="l00212"></a>00212 <span class="preprocessor">#import &lt;Foundation/Foundation.h&gt;</span>
-<a name="l00213"></a>00213 
-<a name="l00214"></a>00214 <span class="preprocessor">#import &quot;ShotgunEntity.h&quot;</span>
-<a name="l00215"></a>00215 <span class="preprocessor">#import &quot;ShotgunRequest.h&quot;</span>
-<a name="l00216"></a>00216 
-<a name="l00218"></a>00218 <span class="keyword">@interface </span>Shotgun : NSObject;
-<a name="l00219"></a>00219 
-<a name="l00220"></a>00220 <span class="preprocessor">#pragma mark - Initialize</span>
-<a name="l00221"></a>00221 <span class="preprocessor"></span>
-<a name="l00226"></a>00226 + (id)shotgunWithUrl:(NSString *)url scriptName:(NSString *)scriptName andKey:(NSString *)key;
-<a name="l00227"></a>00227 
-<a name="l00237"></a>00237 - (id)initWithUrl:(NSString *)url scriptName:(NSString *)scriptName andKey:(NSString *)key;
-<a name="l00238"></a>00238 
-<a name="l00239"></a>00239 <span class="preprocessor">#pragma mark Query Information</span>
-<a name="l00240"></a>00240 <span class="preprocessor"></span>
-<a name="l00245"></a>00245 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)info;
-<a name="l00246"></a>00246 
-<a name="l00247"></a>00247 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)findEntityOfType:(NSString *)entityType withFilters:(<span class="keywordtype">id</span>)filters;
-<a name="l00248"></a>00248 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)findEntityOfType:(NSString *)entityType withFilters:(<span class="keywordtype">id</span>)filters andFields:(<span class="keywordtype">id</span>)fields;
-<a name="l00249"></a>00249 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)findEntityOfType:(NSString *)entityType withFilters:(<span class="keywordtype">id</span>)filters andFields:(<span class="keywordtype">id</span>)fields 
-<a name="l00250"></a>00250                           andOrder:(<span class="keywordtype">id</span>)order andFilterOperator:(NSString *)filterOperator retiredOnly:(BOOL)retiredOnly;
-<a name="l00251"></a>00251 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)findEntitiesOfType:(NSString *)entityType withFilters:(<span class="keywordtype">id</span>)filters;
-<a name="l00252"></a>00252 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)findEntitiesOfType:(NSString *)entityType withFilters:(<span class="keywordtype">id</span>)filters andFields:(<span class="keywordtype">id</span>)fields;
-<a name="l00253"></a>00253 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)findEntitiesOfType:(NSString *)entityType withFilters:(<span class="keywordtype">id</span>)filters andFields:(<span class="keywordtype">id</span>)fields 
-<a name="l00254"></a>00254                        andOrder:(<span class="keywordtype">id</span>)order andFilterOperator:(NSString *)filterOperator;
-<a name="l00255"></a>00255 
-<a name="l00271"></a>00271 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)findEntitiesOfType:(NSString *)entityType withFilters:(<span class="keywordtype">id</span>)filters andFields:(<span class="keywordtype">id</span>)fields 
-<a name="l00272"></a>00272                        andOrder:(<span class="keywordtype">id</span>)order andFilterOperator:(NSString *)filterOperator andLimit:(NSUInteger)limit
-<a name="l00273"></a>00273                         andPage:(NSUInteger)page retiredOnly:(BOOL)retiredOnly;
-<a name="l00274"></a>00274 
-<a name="l00275"></a>00275 <span class="preprocessor">#pragma mark Modify Information</span>
-<a name="l00276"></a>00276 <span class="preprocessor"></span>
-<a name="l00277"></a>00277 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)createEntityOfType:(NSString *)entityType withData:(<span class="keywordtype">id</span>)data;
-<a name="l00278"></a>00278 
-<a name="l00287"></a>00287 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)createEntityOfType:(NSString *)entityType withData:(<span class="keywordtype">id</span>)data returnFields:(<span class="keywordtype">id</span>)returnFields;
-<a name="l00288"></a>00288 
-<a name="l00298"></a>00298 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)updateEntityOfType:(NSString *)entityType withId:(NSNumber *)entityId withData:(<span class="keywordtype">id</span>)data;
-<a name="l00299"></a>00299 
-<a name="l00307"></a>00307 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)deleteEntityOfType:(NSString *)entityType withId:(NSNumber *)entityId;
-<a name="l00308"></a>00308 
-<a name="l00316"></a>00316 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)reviveEntityOfType:(NSString *)entityType withId:(NSNumber *)entityId;
-<a name="l00317"></a>00317 
-<a name="l00325"></a>00325 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)batch:(<span class="keywordtype">id</span>)requests;
-<a name="l00326"></a>00326 
-<a name="l00327"></a>00327 <span class="preprocessor">#pragma mark Meta Schema</span>
-<a name="l00328"></a>00328 <span class="preprocessor"></span>
-<a name="l00332"></a>00332 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)schemaEntityRead;
-<a name="l00333"></a>00333 
-<a name="l00337"></a>00337 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)schemaRead;
-<a name="l00338"></a>00338 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)schemaFieldReadForEntityOfType:(NSString *)entityType;
-<a name="l00339"></a>00339 
-<a name="l00343"></a>00343 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)schemaFieldReadForEntityOfType:(NSString *)entityType forField:(NSString *)fieldName;
-<a name="l00344"></a>00344 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)schemaFieldCreateForEntityOfType:(NSString *)entityType ofDataType:(NSString *)dataType withDisplayName:(NSString *)displayName;
-<a name="l00345"></a>00345 
-<a name="l00349"></a>00349 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)schemaFieldCreateForEntityOfType:(NSString *)entityType ofDataType:(NSString *)dataType withDisplayName:(NSString *)displayName
-<a name="l00350"></a>00350                                  andProperties:(<span class="keywordtype">id</span>)properties;
-<a name="l00351"></a>00351 
-<a name="l00355"></a>00355 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)schemaFieldUpdateForEntityOfType:(NSString *)entityType forField:(NSString *)fieldName withProperties:(<span class="keywordtype">id</span>)properties;
-<a name="l00356"></a>00356 
-<a name="l00360"></a>00360 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)schemaFieldDeleteForEntityOfType:(NSString *)entityType forField:(NSString *)fieldName;
-<a name="l00361"></a>00361 
-<a name="l00365"></a>00365 - (void)setSessionUuid:(NSString *)uuid;
-<a name="l00366"></a>00366 
-<a name="l00367"></a>00367 <span class="preprocessor">#pragma mark Upload and Download Files</span>
-<a name="l00368"></a>00368 <span class="preprocessor"></span>
-<a name="l00372"></a>00372 - (NSNumber *)uploadThumbnailForEntityOfType:(NSString *)entityType withId:(NSNumber *)entityId fromPath:(NSString *)path;
-<a name="l00373"></a>00373 - (NSNumber *)uploadForEntityOfType:(NSString *)entityType withId:(NSNumber *)entityId fromPath:(NSString *)path;
-<a name="l00374"></a>00374 
-<a name="l00378"></a>00378 - (NSNumber *)uploadForEntityOfType:(NSString *)entityType withId:(NSNumber *)entityId fromPath:(NSString *)path
-<a name="l00379"></a>00379                           forField:(NSString *)fieldName withDisplayName:(NSString *)displayName andTagList:(NSString *)tagList;
-<a name="l00380"></a>00380 
-<a name="l00384"></a>00384 - (NSData *)downloadAttachmentWithId:(NSNumber *)attachmentId;
-<a name="l00385"></a>00385 
-<a name="l00386"></a>00386 <span class="keyword">@end</span>
+<a name="l00009"></a>00009 <span class="comment"></span>
+<a name="l00010"></a>00010 <span class="preprocessor">#pragma mark - Interface</span>
+<a name="l00011"></a>00011 <span class="preprocessor"></span>
+<a name="l00012"></a>00012 <span class="preprocessor">#import &lt;Foundation/Foundation.h&gt;</span>
+<a name="l00013"></a>00013 
+<a name="l00014"></a>00014 <span class="preprocessor">#import &quot;<a class="code" href="_shotgun_date_8h.html" title="Classes implementing Date handling.">ShotgunDate.h</a>&quot;</span>
+<a name="l00015"></a>00015 <span class="preprocessor">#import &quot;<a class="code" href="_shotgun_entity_8h.html" title="Interface for a wrapper around dictionaries for Shotgun logic.">ShotgunEntity.h</a>&quot;</span>
+<a name="l00016"></a>00016 <span class="preprocessor">#import &quot;<a class="code" href="_shotgun_request_8h.html" title="Interface for an actual request to Shotgun.">ShotgunRequest.h</a>&quot;</span>
+<a name="l00017"></a>00017 
+<a name="l00025"></a><a class="code" href="interface_shotgun.html">00025</a> <span class="keyword">@interface </span><a class="code" href="interface_shotgun.html" title="Represents a connection to a shotgun server.">Shotgun</a> : NSObject
+<a name="l00026"></a>00026 
+<a name="l00027"></a>00027 <span class="preprocessor">#pragma mark - Initialize</span>
+<a name="l00028"></a>00028 <span class="preprocessor"></span>
+<a name="l00033"></a>00033 + (id)shotgunWithUrl:(NSString *)url scriptName:(NSString *)scriptName andKey:(NSString *)key;
+<a name="l00034"></a>00034 
+<a name="l00044"></a>00044 - (id)initWithUrl:(NSString *)url scriptName:(NSString *)scriptName andKey:(NSString *)key;
+<a name="l00045"></a>00045 
+<a name="l00046"></a>00046 <span class="preprocessor">#pragma mark Query Information</span>
+<a name="l00047"></a>00047 <span class="preprocessor"></span>
+<a name="l00052"></a>00052 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)<a class="code" href="interface_shotgun.html#adc4baaee5608612f4c2cf28f158296dc">info</a>;
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)findEntityOfType:(NSString *)entityType withFilters:(<span class="keywordtype">id</span>)filters;
+<a name="l00055"></a>00055 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)findEntityOfType:(NSString *)entityType withFilters:(<span class="keywordtype">id</span>)filters andFields:(<span class="keywordtype">id</span>)fields;
+<a name="l00056"></a>00056 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)findEntityOfType:(NSString *)entityType withFilters:(<span class="keywordtype">id</span>)filters andFields:(<span class="keywordtype">id</span>)fields 
+<a name="l00057"></a>00057                           andOrder:(<span class="keywordtype">id</span>)order andFilterOperator:(NSString *)filterOperator retiredOnly:(BOOL)retiredOnly;
+<a name="l00058"></a>00058 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)findEntitiesOfType:(NSString *)entityType withFilters:(<span class="keywordtype">id</span>)filters;
+<a name="l00059"></a>00059 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)findEntitiesOfType:(NSString *)entityType withFilters:(<span class="keywordtype">id</span>)filters andFields:(<span class="keywordtype">id</span>)fields;
+<a name="l00060"></a>00060 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)findEntitiesOfType:(NSString *)entityType withFilters:(<span class="keywordtype">id</span>)filters andFields:(<span class="keywordtype">id</span>)fields 
+<a name="l00061"></a>00061                        andOrder:(<span class="keywordtype">id</span>)order andFilterOperator:(NSString *)filterOperator;
+<a name="l00062"></a>00062 
+<a name="l00078"></a>00078 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)findEntitiesOfType:(NSString *)entityType withFilters:(<span class="keywordtype">id</span>)filters andFields:(<span class="keywordtype">id</span>)fields 
+<a name="l00079"></a>00079                        andOrder:(<span class="keywordtype">id</span>)order andFilterOperator:(NSString *)filterOperator andLimit:(NSUInteger)limit
+<a name="l00080"></a>00080                         andPage:(NSUInteger)page retiredOnly:(BOOL)retiredOnly;
+<a name="l00081"></a>00081 
+<a name="l00082"></a>00082 <span class="preprocessor">#pragma mark Modify Information</span>
+<a name="l00083"></a>00083 <span class="preprocessor"></span>
+<a name="l00084"></a>00084 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)createEntityOfType:(NSString *)entityType withData:(<span class="keywordtype">id</span>)data;
+<a name="l00085"></a>00085 
+<a name="l00094"></a>00094 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)createEntityOfType:(NSString *)entityType withData:(<span class="keywordtype">id</span>)data returnFields:(<span class="keywordtype">id</span>)returnFields;
+<a name="l00095"></a>00095 
+<a name="l00104"></a>00104 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)updateEntityOfType:(NSString *)entityType withId:(NSNumber *)entityId withData:(<span class="keywordtype">id</span>)data;
+<a name="l00105"></a>00105 
+<a name="l00113"></a>00113 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)deleteEntityOfType:(NSString *)entityType withId:(NSNumber *)entityId;
+<a name="l00114"></a>00114 
+<a name="l00122"></a>00122 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)reviveEntityOfType:(NSString *)entityType withId:(NSNumber *)entityId;
+<a name="l00123"></a>00123 
+<a name="l00131"></a>00131 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)batch:(<span class="keywordtype">id</span>)requests;
+<a name="l00132"></a>00132 
+<a name="l00133"></a>00133 <span class="preprocessor">#pragma mark Meta Schema</span>
+<a name="l00134"></a>00134 <span class="preprocessor"></span>
+<a name="l00138"></a>00138 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)<a class="code" href="interface_shotgun.html#ac0f71bb6a509ee2aa2a077c34a405ffd">schemaEntityRead</a>;
+<a name="l00139"></a>00139 
+<a name="l00143"></a>00143 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)<a class="code" href="interface_shotgun.html#a6351727ca79e7f669f712ad48ab96178">schemaRead</a>;
+<a name="l00144"></a>00144 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)schemaFieldReadForEntityOfType:(NSString *)entityType;
+<a name="l00145"></a>00145 
+<a name="l00149"></a>00149 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)schemaFieldReadForEntityOfType:(NSString *)entityType forField:(NSString *)fieldName;
+<a name="l00150"></a>00150 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)schemaFieldCreateForEntityOfType:(NSString *)entityType ofDataType:(NSString *)dataType withDisplayName:(NSString *)displayName;
+<a name="l00151"></a>00151 
+<a name="l00155"></a>00155 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)schemaFieldCreateForEntityOfType:(NSString *)entityType ofDataType:(NSString *)dataType withDisplayName:(NSString *)displayName
+<a name="l00156"></a>00156                                  andProperties:(<span class="keywordtype">id</span>)properties;
+<a name="l00157"></a>00157 
+<a name="l00161"></a>00161 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)schemaFieldUpdateForEntityOfType:(NSString *)entityType forField:(NSString *)fieldName withProperties:(<span class="keywordtype">id</span>)properties;
+<a name="l00162"></a>00162 
+<a name="l00166"></a>00166 - (<a class="code" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> *)schemaFieldDeleteForEntityOfType:(NSString *)entityType forField:(NSString *)fieldName;
+<a name="l00167"></a>00167 
+<a name="l00171"></a>00171 - (void)setSessionUuid:(NSString *)uuid;
+<a name="l00172"></a>00172 
+<a name="l00173"></a>00173 <span class="preprocessor">#pragma mark Upload and Download Files</span>
+<a name="l00174"></a>00174 <span class="preprocessor"></span>
+<a name="l00178"></a>00178 - (NSNumber *)uploadThumbnailForEntityOfType:(NSString *)entityType withId:(NSNumber *)entityId fromPath:(NSString *)path;
+<a name="l00179"></a>00179 - (NSNumber *)uploadForEntityOfType:(NSString *)entityType withId:(NSNumber *)entityId fromPath:(NSString *)path;
+<a name="l00180"></a>00180 
+<a name="l00184"></a>00184 - (NSNumber *)uploadForEntityOfType:(NSString *)entityType withId:(NSNumber *)entityId fromPath:(NSString *)path
+<a name="l00185"></a>00185                           forField:(NSString *)fieldName withDisplayName:(NSString *)displayName andTagList:(NSString *)tagList;
+<a name="l00186"></a>00186 
+<a name="l00190"></a>00190 - (NSData *)downloadAttachmentWithId:(NSNumber *)attachmentId;
+<a name="l00191"></a>00191 
+<a name="l00192"></a>00192 <span class="keyword">@end</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -153,7 +153,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Properties</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -162,7 +162,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jun 21 2011 15:50:04 for Shotgun ObjC Api by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Jun 23 2011 18:12:30 for Shotgun ObjC Api by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

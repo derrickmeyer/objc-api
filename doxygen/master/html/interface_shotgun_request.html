@@ -30,6 +30,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -78,9 +79,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">(id)&#160;</td><td class="memItemRight" valign="bottom">- <a class="el" href="interface_shotgun_request.html#af90c0bd35c08cde9cf5dca191ce64977">initWithConfig:path:body:headers:andHTTPMethod:</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a00444af252f09f4d05e305111dd36b4a"></a><!-- doxytag: member="ShotgunRequest::startSynchronous" ref="a00444af252f09f4d05e305111dd36b4a" args="()" -->
-(void)&#160;</td><td class="memItemRight" valign="bottom">- <a class="el" href="interface_shotgun_request.html#a00444af252f09f4d05e305111dd36b4a">startSynchronous</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the connection blocking the current thread until the request is finished. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">(id)&#160;</td><td class="memItemRight" valign="bottom">- <a class="el" href="interface_shotgun_request.html#ac522786022d1f48bb55502df523c2ee3">startSynchronous</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the connection blocking the current thread until the request is finished.  <a href="#ac522786022d1f48bb55502df523c2ee3"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a27324b7817f23f8c79df44d8cecbee8c"></a><!-- doxytag: member="ShotgunRequest::startAsynchronous" ref="a27324b7817f23f8c79df44d8cecbee8c" args="()" -->
 (void)&#160;</td><td class="memItemRight" valign="bottom">- <a class="el" href="interface_shotgun_request.html#a27324b7817f23f8c79df44d8cecbee8c">startAsynchronous</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the connection. <br/></td></tr>
@@ -107,6 +107,12 @@ ShotgunRequestBlock&#160;</td><td class="memItemRight" valign="bottom"><a class=
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5479a78e839e6acc28ac165ee1bffd50"></a><!-- doxytag: member="ShotgunRequest::failedBlock" ref="a5479a78e839e6acc28ac165ee1bffd50" args="" -->
 ShotgunRequestBlock&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_shotgun_request.html#a5479a78e839e6acc28ac165ee1bffd50">failedBlock</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The block called when the request errors. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7cec0fca3cbf207ef8a30dcc3f71f6c4"></a><!-- doxytag: member="ShotgunRequest::isFinished" ref="a7cec0fca3cbf207ef8a30dcc3f71f6c4" args="" -->
+BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_shotgun_request.html#a7cec0fca3cbf207ef8a30dcc3f71f6c4">isFinished</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether the Operation is finished or not. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac31a84b4849474ab542af5336a14cfb9"></a><!-- doxytag: member="ShotgunRequest::isExecuting" ref="ac31a84b4849474ab542af5336a14cfb9" args="" -->
+BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_shotgun_request.html#ac31a84b4849474ab542af5336a14cfb9">isExecuting</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether the Operation is running or not. <br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Represents a simple request being made to a Shotgun instance. </p>
@@ -215,9 +221,28 @@ ShotgunRequestBlock&#160;</td><td class="memItemRight" valign="bottom"><a class=
 
 </div>
 </div>
+<a class="anchor" id="ac522786022d1f48bb55502df523c2ee3"></a><!-- doxytag: member="ShotgunRequest::startSynchronous" ref="ac522786022d1f48bb55502df523c2ee3" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">- (id) startSynchronous </td>
+          <td></td>
+          <td class="paramname"></td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Start the connection blocking the current thread until the request is finished. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The equivalent of calling [request response] </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/Users/rblau/Desktop/Projects/objc-api/master/Classes/<a class="el" href="_shotgun_request_8h_source.html">ShotgunRequest.h</a></li>
-<li>/Users/rblau/Desktop/Projects/objc-api/master/Classes/ShotgunRequest.m</li>
+<li>/Users/rblau/Desktop/Projects/objc-api/master/Classes/<a class="el" href="_shotgun_request_8m.html">ShotgunRequest.m</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -225,7 +250,7 @@ ShotgunRequestBlock&#160;</td><td class="memItemRight" valign="bottom"><a class=
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Properties</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -234,7 +259,7 @@ ShotgunRequestBlock&#160;</td><td class="memItemRight" valign="bottom"><a class=
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Jun 21 2011 15:50:04 for Shotgun ObjC Api by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Jun 23 2011 18:12:30 for Shotgun ObjC Api by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
