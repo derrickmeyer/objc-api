@@ -5,19 +5,13 @@
 //  Created by Rob Blau on 6/8/11.
 //  Copyright 2011 Laika. All rights reserved.
 //
-
-/*!
- * @todo Implement Authentication
- * @todo Figure out a way to do image url lookup in the background
- * @todo Figure out how to handle date fields
- * @todo Finish support for local paths
- * @todo Finish file upload/download asynchronous option
- */
+/// @file Shotgun.m The implementation of the main Shotgun API.
 
 #import "SBJson.h"
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
 
+#import "ShotgunLogging.h"
 #import "ShotgunConfig.h"
 #import "ServerCapabilities.h"
 #import "ClientCapabilities.h"
@@ -177,7 +171,6 @@
             [newFilters setObject:@"and" forKey:@"logical_operator"];
         else
             [newFilters setObject:@"or" forKey:@"logical_operator"];
-        
         NSMutableArray *conditions = [NSMutableArray array];
         for (NSArray *filter in checkedFilters)
             [conditions addObject:[NSDictionary dictionaryWithObjectsAndKeys:
@@ -359,8 +352,13 @@
 
 - (ShotgunRequest *)batch:(id)requests
 {
+    // Convert JSON arg to object
+    id checkedRequests = requests;
+    if ([checkedRequests isKindOfClass:[NSString class]])
+        checkedRequests = [requests JSONValue];
+    
     NSMutableArray *calls = [NSMutableArray array];
-    for (NSDictionary *request in requests) {
+    for (NSDictionary *request in checkedRequests) {
         NSString *requestType = [request objectForKey:@"request_type"];
         if ([requestType isEqualToString:@"create"]) {
             NSSet *requiredKeys = [NSSet setWithObjects:@"entity_type", @"data", nil];
@@ -541,13 +539,18 @@
                 "%@: %@", path, error];
     }
     NSString *response = [request responseString];
-    NSLog(@"Response: %@", response);
+    SG_INFO(@"Upload Response: %@", response);
     if ([response characterAtIndex:0] != '1')
         [NSException raise:@"File upload error" format:@"Could not upload file successfully, " \
             "but not sure why.\nPath: %@\nUrl: %@\nError: %@", path, url, response];
 
-    NSNumber *resultId = [NSNumber numberWithInt:0];
-    return resultId;
+    NSArray *splitResponse = [response componentsSeparatedByString:@":"];
+    if ([splitResponse count] <= 1)
+        return [NSNumber numberWithInt:0];
+    NSNumberFormatter *formatter = [[[NSNumberFormatter alloc] init] autorelease];
+    NSArray *splitValue = [[splitResponse objectAtIndex:1] componentsSeparatedByString:@"\n"];
+    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    return [formatter numberFromString:[splitValue objectAtIndex:0]];
 }
 
 - (NSData *)downloadAttachmentWithId:(NSNumber *)attachmentId
@@ -672,7 +675,6 @@
     NSOperationQueue *queue = [[[NSOperationQueue alloc] init] autorelease];
     [queue setMaxConcurrentOperationCount:4];
     queue.name = @"Thumbnail Converting Queue";
-    NSLog(@"Converting thumbs on queue: %@", queue.name);
     if (![records isKindOfClass:[NSArray class]])
         iteratee = [NSArray arrayWithObject:records];
     else
@@ -698,6 +700,15 @@
                 }];
                 continue;
             }
+            
+            if ([value isKindOfClass:[NSDictionary class]] &&
+                [[value objectForKey:@"link_type"] isEqualToString:@"local"]) {
+                NSString *localPath = [value objectForKey:self.clientCaps.localPathField];
+                if (localPath != Nil) {
+                    [value setObject:localPath forKey:@"local_path"];
+                    [value setObject:[NSString stringWithFormat:@"file://%@", localPath] forKey:@"url"];
+                }
+            }
         }
     }
     [queue waitUntilAllOperationsAreFinished];
@@ -717,7 +728,7 @@
     NSArray *parts = [body componentsSeparatedByString:@"\n"];
     NSInteger code = [(NSString *)[parts objectAtIndex:0] integerValue];
     if (code == 0)
-        NSLog(@"Error getting thumbnail url for entity %@ response was '%@'", entity, body);
+        SG_ERROR(@"Error getting thumbnail url for entity %@ response was '%@'", entity, body);
     if (code == 1) {
         NSString *path = [parts objectAtIndex:1];
         if ([path length] == 0)
@@ -726,7 +737,7 @@
         return [url absoluteString];
         
     }
-    NSLog(@"Error getting thumbnail url: Unknown code %d %@", code, parts);
+    SG_ERROR(@"Error getting thumbnail url: Unknown code %d %@", code, parts);
     return Nil;
 }
 
@@ -778,9 +789,18 @@
 {
     id(^outboundVisitor)(id) = ^(id value) {
         if ([value isKindOfClass:[NSDate class]]) {
-            NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
-            [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
-            NSString *ret = [formatter stringFromDate:value];
+            NSString *ret = Nil;
+            if ([value isKindOfClass:[ShotgunDateTime class]]) {
+                NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+                [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
+                ret = [formatter stringFromDate:value];
+            } else if ([value isKindOfClass:[ShotgunDate class]]) {
+                NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+                [formatter setDateFormat:@"yyyy-MM-dd"];
+                ret = [formatter stringFromDate:value];
+            } else {
+                [NSException raise:@"Shotgun Error" format:@"Cannot pass in a NSDate, must be ShotgunDate or ShotgunDateTime"];
+            }
             return ret ? ret : value;
         }
         return value;
@@ -796,7 +816,8 @@
             if([value length] == 20) {
                 NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
                 [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
-                NSDate *date = [formatter dateFromString:value];
+                NSDate *convertedDate = [formatter dateFromString:value];
+                ShotgunDateTime *date = [ShotgunDateTime dateTimeWithDate:convertedDate];
                 return date ? date : value;
             }
         }

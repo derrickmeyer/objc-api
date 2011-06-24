@@ -5,6 +5,7 @@
 //  Created by Rob Blau on 6/15/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
+/// @file ShotgunEntity.h Interface for a wrapper around dictionaries for Shotgun logic.
 
 #import <Foundation/Foundation.h>
 
@@ -13,7 +14,7 @@
  * @details
  * This is a thin wrapper around <a href="http://developer.apple.com/library/mac/#documentation/Cocoa/Reference/Foundation/Classes/NSMutableDictionary_Class/Reference/Reference.html#//apple_ref/doc/uid/20000141-17091">NSMutableDictionary</a>.
  */
-@interface ShotgunEntity : NSMutableDictionary;
+@interface ShotgunEntity : NSMutableDictionary
 
 @property (retain, readonly, nonatomic) NSNumber *entityId;   ///< The id of the entity in %Shotgun
 @property (retain, readonly, nonatomic) NSString *entityType; ///< The type of the entity in %Shotgun

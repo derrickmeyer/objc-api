@@ -5,10 +5,11 @@
 //  Created by Rob Blau on 6/11/11.
 //  Copyright 2011 Laika. All rights reserved.
 //
+/// @file ServerCapabilities.h A structure for storing information about the server.
 
 #import <Foundation/Foundation.h>
 
-@interface ServerCapabilities : NSObject;
+@interface ServerCapabilities : NSObject
 
 @property (assign, readonly, nonatomic) BOOL isDev;
 @property (assign, readonly, nonatomic) BOOL hasPaging;

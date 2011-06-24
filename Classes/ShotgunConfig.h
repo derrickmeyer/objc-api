@@ -5,11 +5,12 @@
 //  Created by Rob Blau on 6/8/11.
 //  Copyright 2011 Laika. All rights reserved.
 //
+/// @file ShotgunConfig.h A structure for storing information about how to interact with the server.
 
 #import <Foundation/Foundation.h>
 
 
-@interface ShotgunConfig : NSObject;
+@interface ShotgunConfig : NSObject
 
 @property (assign, readwrite, nonatomic) NSUInteger maxRpcAttempts;
 @property (assign, readwrite, nonatomic) NSUInteger timeoutSecs;

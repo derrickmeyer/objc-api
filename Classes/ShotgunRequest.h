@@ -5,6 +5,7 @@
 //  Created by Rob Blau on 6/15/11.
 //  Copyright 2011 Laika. All rights reserved.
 //
+/// @file ShotgunRequest.h Interface for an actual request to Shotgun
 
 #import <Foundation/Foundation.h>
 
@@ -20,7 +21,7 @@ typedef id (^ShotgunPostProcessBlock)(NSDictionary *, NSString *);
 #pragma mark ShotgunRequest
 
 /** Represents a simple request being made to a %Shotgun instance. */
-@interface ShotgunRequest : NSOperation <ASIHTTPRequestDelegate>;
+@interface ShotgunRequest : NSOperation <ASIHTTPRequestDelegate>
 
 /*! Initialize a request
  *
@@ -40,8 +41,11 @@ typedef id (^ShotgunPostProcessBlock)(NSDictionary *, NSString *);
  */
 - (id)initWithConfig:(ShotgunConfig *)config path:(NSString *)path body:(NSString *)body headers:(NSDictionary *)headers andHTTPMethod:(NSString *)method;
 
-/** Start the connection blocking the current thread until the request is finished */
-- (void)startSynchronous;
+/** Start the connection blocking the current thread until the request is finished
+ *
+ * @return The equivalent of calling [request response]
+ */
+- (id)startSynchronous;
 
 /** Start the connection */
 - (void)startAsynchronous;
@@ -56,7 +60,7 @@ typedef id (^ShotgunPostProcessBlock)(NSDictionary *, NSString *);
 @property (copy, readwrite, nonatomic) ShotgunRequestBlock completionBlock; ///< The block called when the request completes
 @property (copy, readwrite, nonatomic) ShotgunRequestBlock failedBlock; ///< The block called when the request errors
 
-@property (assign, readonly, nonatomic) BOOL isFinished;
-@property (assign, readonly, nonatomic) BOOL isExecuting;
+@property (assign, readonly, nonatomic) BOOL isFinished; ///< Whether the Operation is finished or not.
+@property (assign, readonly, nonatomic) BOOL isExecuting; ///< Whether the Operation is running or not.
 
 @end

@@ -5,6 +5,7 @@
 //  Created by Rob Blau on 6/8/11.
 //  Copyright 2011 Laika. All rights reserved.
 //
+/// @file ShotgunConfig.m Implementation of ShotgunConfig
 
 #import "ShotgunConfig.h"
 
@@ -32,9 +33,9 @@
     self = [super init];
     if (self) {
         self.maxRpcAttempts = 3;
-        self.timeoutSecs = 3;
+        self.timeoutSecs = 20;
         self.apiVer = @"api3";
-        self.recordsPerPage = 500;
+        self.recordsPerPage = 100;
         self.apiKey = Nil;
         self.scheme = Nil;
         self.server = Nil;

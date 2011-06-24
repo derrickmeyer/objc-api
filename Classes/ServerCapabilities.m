@@ -5,6 +5,7 @@
 //  Created by Rob Blau on 6/11/11.
 //  Copyright 2011 Laika. All rights reserved.
 //
+/// @file ServerCapabilities.m Implementation of ServerCapabilities
 
 #import "ServerCapabilities.h"
 

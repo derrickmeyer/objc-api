@@ -5,6 +5,8 @@
 //  Created by Rob Blau on 6/15/11.
 //  Copyright 2011 Laika. All rights reserved.
 //
+/// @file ShotgunRequest.m Implementation of Request handling.
+/// @todo Make requests copyable
 
 #import "SBJson.h"
 #import "ASIHTTPRequest.h"
@@ -12,8 +14,11 @@
 #import "ShotgunConfig.h"
 #import "ShotgunEntity.h"
 
+#import "ShotgunLogging.h"
 #import "ShotgunRequest.h"
 #import "ShotgunRequestPrivate.h"
+
+static NSOperationQueue *sharedQueue = Nil;
 
 @interface ShotgunRequest()
 
@@ -65,6 +70,15 @@
 @synthesize headers = headers_;
 @synthesize method = method_;
 
++ (void)initialize
+{
+    if (self == [ShotgunRequest class]) {
+        sharedQueue = [[NSOperationQueue alloc] init];
+        [sharedQueue setName:@"Shotgun Request Default Queue"];
+        [sharedQueue setMaxConcurrentOperationCount:4];
+    }
+}
+
 + (id)shotgunRequestWithConfig:(ShotgunConfig *)config path:(NSString *)path body:(NSString *)body headers:(NSDictionary *)headers andHTTPMethod:(NSString *)method
 {
     return [[[ShotgunRequest alloc] initWithConfig:config path:path body:body headers:headers andHTTPMethod:method] autorelease];
@@ -74,19 +88,20 @@
 {
     self = [super init];
     if (self) {
-        self.queue = [NSOperationQueue mainQueue];
         self.config = config;
         self.path = path;
         self.body = body;
         self.headers = headers;
         self.method = method;
+        self.queue = sharedQueue;
     }
     return self;
 }
 
-- (void)startSynchronous
+- (id)startSynchronous
 {
     [self startSynchronous:YES];
+    return [self response];
 }
 
 - (void)startSynchronous:(BOOL)synchronous
@@ -98,16 +113,18 @@
     
     self.currentAttempt = 0;
     self.maxAttempts = self.config.maxRpcAttempts;
+    self.timeout = self.config.timeoutSecs;
     self.request = [self makeRequest];
-    NSLog(@"Request is %@:%@", [self.request requestMethod], [self.request url]);
-    NSLog(@"Request headers are %@", [self.request requestHeaders]);
-    NSLog(@"Request body is %@", [NSString stringWithUTF8String:[[self.request postBody] bytes]]); 
+    NSString *body = [[[NSString alloc] initWithData:[self.request postBody] encoding:NSUTF8StringEncoding] autorelease];
+    SG_INFO(@"\nStarting %@ request %@ with body\n-----------------------\n%@\n-----------------------",
+            synchronous ? @"synchronous" : @"asynchronous",
+            [self.request requestID],
+            body);
 
     if (synchronous == YES) {
         [self.request startSynchronous];
         [self finishSynchronous:YES];
     } else {
-        NSLog(@"Started on queue: %@", [self.queue name]);
         [self willChangeValueForKey:@"isExecuting"];
         self.isExecuting = YES;
         [self didChangeValueForKey:@"isExecuting"];
@@ -120,6 +137,11 @@
 
 - (void)startAsynchronous
 {
+    int runningCount = 0;
+    NSArray *ops = [self.queue operations];
+    for (NSOperation *op in ops)
+        runningCount += ([op isExecuting]) ? 1 : 0;
+    SG_INFO(@"ASYNC Starting: Queue count (%d/%d running)", runningCount, [ops count]);
     [self.queue addOperation:self];
 }
 
@@ -133,6 +155,7 @@
     if (synchronous == YES) {
         while (self.currentAttempt < self.maxAttempts) {
             self.currentAttempt += 1;
+            SG_INFO(@"Request failed, trying again (try %d). %@", self.currentAttempt, [self.request error]);
             self.request = [self makeRequest];
             [self.request startSynchronous];
             NSData *data = [self.request responseData];
@@ -150,6 +173,7 @@
 {
     NSData *data = [self.request responseData];
     if ((data == Nil) && (self.currentAttempt < self.maxAttempts)) {
+        SG_INFO(@"Request failed, trying again.");
         [self continueSynchronous:synchronous];
         return;
     }
@@ -157,10 +181,10 @@
     self.response = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
     if (self.postProcessBlock)
         self.response = [self.postProcessBlock([self.request responseHeaders], self.response) retain];
-    NSLog(@"Response status is %d %@", [self.request responseStatusCode], [self.request responseStatusMessage]);
-    NSLog(@"Response headers are %@", [self.request responseHeaders]);
-    NSLog(@"Response is (rc %d) %@", [self.response retainCount], self.response);
-    NSLog(@"Completed rpc call to %@", [self.request requestMethod]);
+    SG_INFO(@"Finished request %@", [self.request requestID]);
+    SG_DEBUG(@"Response status is %d %@", [self.request responseStatusCode], [self.request responseStatusMessage]);
+    SG_DEBUG(@"Response headers are %@", [self.request responseHeaders]);
+    SG_DEBUG(@"Response is %@", self.response);
 
     if (synchronous == NO) {
         [self willChangeValueForKey:@"isExecuting"];
@@ -175,13 +199,21 @@
 
 #pragma mark ASIHTTPRequest Delegate
 
+- (void)requestStarted:(ASIHTTPRequest *)request
+{
+    SG_INFO(@"ASYNC Started: %@", [request requestID]);    
+}
+
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
+    SG_INFO(@"ASYNC Finished: %@", [request requestID]);
     [self finishSynchronous:NO];
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
+    NSString *body = [[[NSString alloc] initWithData:[self.request postBody] encoding:NSUTF8StringEncoding] autorelease];
+    SG_INFO(@"ASYNC Failed (current %d): %@\n%@\n-----------\n%@\n----------", self.currentAttempt, [request requestID], [request error], body);
     /// @todo Set class error
     if (self.currentAttempt < self.maxAttempts) {
         [self continueSynchronous:NO];
@@ -217,7 +249,8 @@
     [aRequest setRequestMethod:self.method];
     [aRequest setRequestHeaders:[NSMutableDictionary dictionaryWithDictionary:self.headers]];
     [aRequest setShouldAttemptPersistentConnection:YES];
-    [aRequest setTimeOutSeconds:self.config.timeoutSecs];
+    [aRequest setTimeOutSeconds:self.timeout];
+    [aRequest setNumberOfTimesToRetryOnTimeout:self.config.maxRpcAttempts];
     return aRequest;
 }
 

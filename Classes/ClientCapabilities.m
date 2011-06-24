@@ -5,6 +5,7 @@
 //  Created by Rob Blau on 6/11/11.
 //  Copyright 2011 Laika. All rights reserved.
 //
+/// @file ClientCapabilities.m Implementation of ClientCapabilities
 
 #import "ClientCapabilities.h"
 
