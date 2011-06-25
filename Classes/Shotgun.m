@@ -257,6 +257,7 @@
     // Get as many pages as needed
     ShotgunRequest *request = [self requestWithMethod_:@"read" andParams:params];
     ShotgunPostProcessBlock oldPost = [request postProcessBlock];
+    [params retain]; // Make sure params sticks around until we are done
     [request setPostProcessBlock:^id (NSDictionary *headers, NSString *body) {
         NSDictionary *result = oldPost(headers, body);
         NSArray *entities = [result objectForKey:@"entities"];
@@ -277,7 +278,9 @@
             ShotgunRequest *nextPageRequest = [self requestWithMethod_:@"read" andParams:params];
             [nextPageRequest startSynchronous];
             result = [nextPageRequest response];
+            entities = [result objectForKey:@"entities"];
         }
+        [params release]; // Now all done with params, let the autorelease pool do its thing.
         NSArray *ret = [self parseRecords_:returnRecords];
         return ret;
     }];

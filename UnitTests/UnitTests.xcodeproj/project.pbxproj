@@ -179,7 +179,6 @@
 		5C7DF79613B3A6C600AEE57C /* Docs */ = {
 			isa = PBXGroup;
 			children = (
-				5C7DF79313B3A6BC00AEE57C /* Mainpage.dox */,
 			);
 			name = Docs;
 			sourceTree = "<group>";
@@ -285,6 +284,7 @@
 				5CA19BCD13A83ADE001EFE89 /* ServerCapabilities.h */,
 				5CA19BCE13A83ADE001EFE89 /* ServerCapabilities.m */,
 				5C7DF79613B3A6C600AEE57C /* Docs */,
+				5C7DF79313B3A6BC00AEE57C /* Mainpage.dox */,
 			);
 			name = "shotgun-api";
 			path = ../Classes;
