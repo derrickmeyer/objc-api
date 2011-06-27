@@ -9,6 +9,9 @@
 
 #import <Foundation/Foundation.h>
 
+/// @typedef A block taking an UIImage
+typedef void (^ThumbnailBlock)(UIImage *);
+
 /*! @brief Represents a %Shotgun entity.
  *
  * @details
@@ -22,6 +25,7 @@
 + (id)shotgunEntity; ///< Initialize an empty entity.
 + (id)shotgunEntityWithDictionary:(NSDictionary *)dictionary; ///< Initialize an entity with the provided dictionary.
 + (id)shotgunEntityWithJSON:(NSString *)json; ///< Initialize an entity with the dictionary value of the JSON string.
+
 - (id)init;
 - (id)initWithJSON:(NSString *)json;
 - (void)dealloc;

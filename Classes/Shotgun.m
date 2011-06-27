@@ -40,7 +40,6 @@
 - (NSString *)getSessionToken_;
 
 - (NSArray *)parseRecords_:(id)records;
-- (NSString *)buildThumbUrlForEntity_:(ShotgunEntity *)entity;
 
 - (NSArray *)listFromObj_:(id)obj;
 - (NSArray *)listFromObj_:(id)obj withKeyName:(NSString *)keyName andValueName:(NSString *)valueName;
@@ -285,6 +284,73 @@
         return ret;
     }];
     return request;
+}
+
+- (NSString *)thumbnailUrlForEntity:(ShotgunEntity *)entity
+{
+    NSString *path = [[NSString
+                       stringWithFormat:@"/upload/get_thumbnail_url?entity_type=%@&entity_id=%@", 
+                       [entity entityType], [entity entityId]]
+                      stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+    ShotgunRequest *request = 
+    [ShotgunRequest shotgunRequestWithConfig:self.config path:path body:Nil headers:Nil andHTTPMethod:@"GET"];
+    [request startSynchronous];
+    NSString *body = [request response];
+    NSArray *parts = [body componentsSeparatedByString:@"\n"];
+    NSInteger code = [(NSString *)[parts objectAtIndex:0] integerValue];
+    if (code == 0)
+        SG_ERROR(@"Error getting thumbnail url for entity %@ response was '%@'", entity, body);
+    if (code == 1) {
+        NSString *path = [parts objectAtIndex:1];
+        if ([path length] == 0)
+            return path;
+        NSURL *url = [[[NSURL alloc] initWithScheme:self.config.scheme host:self.config.server path:[parts objectAtIndex:1]] autorelease];
+        return [url absoluteString];
+        
+    }
+    SG_ERROR(@"Error getting thumbnail url: Unknown code %d %@", code, parts);
+    return Nil;
+}
+
+- (void)thumbnailForEntity:(ShotgunEntity *)entity withBlock:(ThumbnailBlock)block
+{
+    NSString *url = [entity objectForKey:@"image"];
+    if (url == Nil) {
+        __block ShotgunEntity* blockEntity = entity;
+        [[ShotgunRequest sharedQueue] addOperationWithBlock:^{
+            NSString *thumbUrl = [self thumbnailUrlForEntity:entity];
+            if (thumbUrl == Nil) { 
+                block(Nil);
+                return;
+            }
+            [blockEntity setObject:thumbUrl forKey:@"image"];
+            if ([thumbUrl length] == 0) {
+                block(Nil);
+                return;
+            }
+            NSURL *aURL = [NSURL URLWithString:thumbUrl];
+            ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:aURL];
+            [request startSynchronous];
+            UIImage *image = [[UIImage imageWithData:[request responseData]] retain];
+            block(image);
+            [image release];
+        }];
+        return;
+    }
+    
+    if ([url length] == 0) {
+        block(Nil);
+        return;
+    }
+    
+    [[ShotgunRequest sharedQueue] addOperationWithBlock:^{
+        NSURL *aURL = [NSURL URLWithString:url];
+        ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:aURL];
+        [request startSynchronous];
+        UIImage *image = [[UIImage imageWithData:[request responseData]] retain];
+        block(image);
+        [image release];
+    }];
 }
 
 #pragma mark Modify Information
@@ -695,11 +761,11 @@
                 continue;
             if ([key isEqualToString:@"image"]) {
                 [queue addOperationWithBlock:^{
-                    NSString *url = [self buildThumbUrlForEntity_:entity];
-                    if (url)
-                        [entity setObject:url forKey:@"image"];
-                    else
+                    NSString *url = [self thumbnailUrlForEntity:entity];
+                    if (url == Nil)
                         [entity removeObjectForKey:@"image"];
+                    else
+                        [entity setObject:url forKey:@"image"];
                 }];
                 continue;
             }
@@ -716,32 +782,6 @@
     }
     [queue waitUntilAllOperationsAreFinished];
     return ret;
-}
-
-- (NSString *)buildThumbUrlForEntity_:(ShotgunEntity *)entity
-{
-    NSString *path = [[NSString
-                       stringWithFormat:@"/upload/get_thumbnail_url?entity_type=%@&entity_id=%@", 
-                       [entity entityType], [entity entityId]]
-                      stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-    ShotgunRequest *request = 
-        [ShotgunRequest shotgunRequestWithConfig:self.config path:path body:Nil headers:Nil andHTTPMethod:@"GET"];
-    [request startSynchronous];
-    NSString *body = [request response];
-    NSArray *parts = [body componentsSeparatedByString:@"\n"];
-    NSInteger code = [(NSString *)[parts objectAtIndex:0] integerValue];
-    if (code == 0)
-        SG_ERROR(@"Error getting thumbnail url for entity %@ response was '%@'", entity, body);
-    if (code == 1) {
-        NSString *path = [parts objectAtIndex:1];
-        if ([path length] == 0)
-            return Nil;
-        NSURL *url = [[[NSURL alloc] initWithScheme:self.config.scheme host:self.config.server path:[parts objectAtIndex:1]] autorelease];
-        return [url absoluteString];
-        
-    }
-    SG_ERROR(@"Error getting thumbnail url: Unknown code %d %@", code, parts);
-    return Nil;
 }
 
 -(NSArray *)listFromObj_:(id)obj

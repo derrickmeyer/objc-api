@@ -189,4 +189,26 @@
  */
 - (NSData *)downloadAttachmentWithId:(NSNumber *)attachmentId;
 
+/*!
+ * Returns the url to the thumbnail for this entity.
+ *
+ * This is the equivalent of having "image" filled out when finding the entity,
+ * which incurs a round trip to %Shotgun per entity retrieved.  This method lets
+ * you control when that round trip happens.
+ *
+ * @param entity A ShotgunEntity representing the entity to return the url to the thumbnail of.
+ * @return an NSString that is the string form of the url to the thumbnail of @p entity.
+ */
+- (NSString *)thumbnailUrlForEntity:(ShotgunEntity *)entity;
+
+
+/**
+ * Does what processing is needed to download the thumbnail for this entity asynchronously.
+ *
+ * @param entity A ShotgunEntity to download the thumbnail for.
+ * @param block A ThumbnailBlock that will be run on the resulting UIImage.
+ * @note The image field on @p entity will be filled out as a side effect, so entity should be declared __block.
+ */
+- (void)thumbnailForEntity:(ShotgunEntity *)entity withBlock:(ThumbnailBlock)block;
+
 @end

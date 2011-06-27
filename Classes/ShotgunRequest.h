@@ -29,6 +29,12 @@ typedef id (^ShotgunPostProcessBlock)(NSDictionary *, NSString *);
  */
 + (id)shotgunRequestWithConfig:(ShotgunConfig *)config path:(NSString *)path body:(NSString *)body headers:(NSDictionary *)headers andHTTPMethod:(NSString *)method;
 
+/*! Returns the default queue used by ShotgunRequests
+ *
+ * @return An NSOperationQueue that is the default queue for ShotgunRequests
+ */
++ (NSOperationQueue *)sharedQueue;
+
 /*! Initialize the request
  *
  * @param config A ShotgunConfig with the information on what host to connect to and how to authenticate

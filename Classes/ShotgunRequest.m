@@ -84,6 +84,11 @@ static NSOperationQueue *sharedQueue = Nil;
     return [[[ShotgunRequest alloc] initWithConfig:config path:path body:body headers:headers andHTTPMethod:method] autorelease];
 }
 
++ (NSOperationQueue *)sharedQueue
+{
+    return sharedQueue;
+}
+
 - (id)initWithConfig:(ShotgunConfig *)config path:(NSString *)path body:(NSString *)body headers:(NSDictionary *)headers andHTTPMethod:(NSString *)method 
 {
     self = [super init];
