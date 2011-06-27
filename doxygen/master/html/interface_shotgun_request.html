@@ -87,6 +87,7 @@ Public Member Functions</h2></td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">(id)&#160;</td><td class="memItemRight" valign="bottom">+ <a class="el" href="interface_shotgun_request.html#a3f57155d0223b7dbc2df085410418476">shotgunRequestWithConfig:path:body:headers:andHTTPMethod:</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">(NSOperationQueue *)&#160;</td><td class="memItemRight" valign="bottom">+ <a class="el" href="interface_shotgun_request.html#a915dbff5669c2c4fb2e63cf74c0be5b0">sharedQueue</a></td></tr>
 <tr><td colspan="2"><h2><a name="properties"></a>
 Properties</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3dffc7ec86880fa40ac3890c2a92e0d6"></a><!-- doxytag: member="ShotgunRequest::response" ref="a3dffc7ec86880fa40ac3890c2a92e0d6" args="" -->
@@ -171,6 +172,24 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inte
   </dd>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A <a class="el" href="interface_shotgun_request.html" title="Represents a simple request being made to a Shotgun instance.">ShotgunRequest</a> object </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a915dbff5669c2c4fb2e63cf74c0be5b0"></a><!-- doxytag: member="ShotgunRequest::sharedQueue" ref="a915dbff5669c2c4fb2e63cf74c0be5b0" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">+ (NSOperationQueue *) sharedQueue </td>
+          <td></td>
+          <td class="paramname"></td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Returns the default queue used by ShotgunRequests</p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>An NSOperationQueue that is the default queue for ShotgunRequests </dd></dl>
 
 </div>
 </div>
@@ -259,7 +278,7 @@ BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inte
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Jun 23 2011 18:12:30 for Shotgun ObjC Api by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jun 27 2011 16:35:32 for Shotgun ObjC Api by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

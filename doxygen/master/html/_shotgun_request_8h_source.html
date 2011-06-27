@@ -84,26 +84,28 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00025"></a>00025 
 <a name="l00030"></a>00030 + (id)shotgunRequestWithConfig:(ShotgunConfig *)config path:(NSString *)path body:(NSString *)body headers:(NSDictionary *)headers andHTTPMethod:(NSString *)method;
 <a name="l00031"></a>00031 
-<a name="l00042"></a>00042 - (id)initWithConfig:(ShotgunConfig *)config path:(NSString *)path body:(NSString *)body headers:(NSDictionary *)headers andHTTPMethod:(NSString *)method;
-<a name="l00043"></a>00043 
-<a name="l00048"></a>00048 - (id)<a class="code" href="interface_shotgun_request.html#ac522786022d1f48bb55502df523c2ee3" title="Start the connection blocking the current thread until the request is finished.">startSynchronous</a>;
+<a name="l00036"></a>00036 + (NSOperationQueue *)<a class="code" href="interface_shotgun_request.html#a915dbff5669c2c4fb2e63cf74c0be5b0">sharedQueue</a>;
+<a name="l00037"></a>00037 
+<a name="l00048"></a>00048 - (id)initWithConfig:(ShotgunConfig *)config path:(NSString *)path body:(NSString *)body headers:(NSDictionary *)headers andHTTPMethod:(NSString *)method;
 <a name="l00049"></a>00049 
-<a name="l00051"></a>00051 - (void)<a class="code" href="interface_shotgun_request.html#a27324b7817f23f8c79df44d8cecbee8c" title="Start the connection.">startAsynchronous</a>;
-<a name="l00052"></a>00052 
-<a name="l00053"></a>00053 - (void)dealloc;
-<a name="l00054"></a>00054 
-<a name="l00055"></a><a class="code" href="interface_shotgun_request.html#a3dffc7ec86880fa40ac3890c2a92e0d6">00055</a> <span class="keyword">@property</span> (retain, readonly, nonatomic) <span class="keywordtype">id</span> <a class="code" href="interface_shotgun_request.html#a3dffc7ec86880fa40ac3890c2a92e0d6" title="The return value of the request.">response</a>; 
-<a name="l00056"></a><a class="code" href="interface_shotgun_request.html#ae7ad63f6797c300ccafb0f4caaa554e2">00056</a> <span class="keyword">@property</span> (retain, readonly, nonatomic) NSError *<a class="code" href="interface_shotgun_request.html#ae7ad63f6797c300ccafb0f4caaa554e2" title="The value of an error if it occurred.">error</a>; 
-<a name="l00057"></a>00057 
-<a name="l00058"></a><a class="code" href="interface_shotgun_request.html#a9cd1cf1d46491ab560cbaa9c2b9412e7">00058</a> <span class="keyword">@property</span> (retain, readwrite, nonatomic) NSOperationQueue *<a class="code" href="interface_shotgun_request.html#a9cd1cf1d46491ab560cbaa9c2b9412e7" title="The operation queue to run in. Defaults to the main queue.">queue</a>; 
-<a name="l00059"></a><a class="code" href="interface_shotgun_request.html#a435c6bcf0ec69c6b8afcf275bfb2aff2">00059</a> <span class="keyword">@property</span> (copy, readwrite, nonatomic) ShotgunRequestBlock <a class="code" href="interface_shotgun_request.html#a435c6bcf0ec69c6b8afcf275bfb2aff2" title="The block called when the request is started.">startedBlock</a>; 
-<a name="l00060"></a><a class="code" href="interface_shotgun_request.html#aac110c5fd0df54f3caca020d830df84e">00060</a> <span class="keyword">@property</span> (copy, readwrite, nonatomic) ShotgunRequestBlock <a class="code" href="interface_shotgun_request.html#aac110c5fd0df54f3caca020d830df84e" title="The block called when the request completes.">completionBlock</a>; 
-<a name="l00061"></a><a class="code" href="interface_shotgun_request.html#a5479a78e839e6acc28ac165ee1bffd50">00061</a> <span class="keyword">@property</span> (copy, readwrite, nonatomic) ShotgunRequestBlock <a class="code" href="interface_shotgun_request.html#a5479a78e839e6acc28ac165ee1bffd50" title="The block called when the request errors.">failedBlock</a>; 
-<a name="l00062"></a>00062 
-<a name="l00063"></a><a class="code" href="interface_shotgun_request.html#a7cec0fca3cbf207ef8a30dcc3f71f6c4">00063</a> <span class="keyword">@property</span> (assign, readonly, nonatomic) BOOL <a class="code" href="interface_shotgun_request.html#a7cec0fca3cbf207ef8a30dcc3f71f6c4" title="Whether the Operation is finished or not.">isFinished</a>; 
-<a name="l00064"></a><a class="code" href="interface_shotgun_request.html#ac31a84b4849474ab542af5336a14cfb9">00064</a> <span class="keyword">@property</span> (assign, readonly, nonatomic) BOOL <a class="code" href="interface_shotgun_request.html#ac31a84b4849474ab542af5336a14cfb9" title="Whether the Operation is running or not.">isExecuting</a>; 
-<a name="l00065"></a>00065 
-<a name="l00066"></a>00066 <span class="keyword">@end</span>
+<a name="l00054"></a>00054 - (id)<a class="code" href="interface_shotgun_request.html#ac522786022d1f48bb55502df523c2ee3" title="Start the connection blocking the current thread until the request is finished.">startSynchronous</a>;
+<a name="l00055"></a>00055 
+<a name="l00057"></a>00057 - (void)<a class="code" href="interface_shotgun_request.html#a27324b7817f23f8c79df44d8cecbee8c" title="Start the connection.">startAsynchronous</a>;
+<a name="l00058"></a>00058 
+<a name="l00059"></a>00059 - (void)dealloc;
+<a name="l00060"></a>00060 
+<a name="l00061"></a><a class="code" href="interface_shotgun_request.html#a3dffc7ec86880fa40ac3890c2a92e0d6">00061</a> <span class="keyword">@property</span> (retain, readonly, nonatomic) <span class="keywordtype">id</span> <a class="code" href="interface_shotgun_request.html#a3dffc7ec86880fa40ac3890c2a92e0d6" title="The return value of the request.">response</a>; 
+<a name="l00062"></a><a class="code" href="interface_shotgun_request.html#ae7ad63f6797c300ccafb0f4caaa554e2">00062</a> <span class="keyword">@property</span> (retain, readonly, nonatomic) NSError *<a class="code" href="interface_shotgun_request.html#ae7ad63f6797c300ccafb0f4caaa554e2" title="The value of an error if it occurred.">error</a>; 
+<a name="l00063"></a>00063 
+<a name="l00064"></a><a class="code" href="interface_shotgun_request.html#a9cd1cf1d46491ab560cbaa9c2b9412e7">00064</a> <span class="keyword">@property</span> (retain, readwrite, nonatomic) NSOperationQueue *<a class="code" href="interface_shotgun_request.html#a9cd1cf1d46491ab560cbaa9c2b9412e7" title="The operation queue to run in. Defaults to the main queue.">queue</a>; 
+<a name="l00065"></a><a class="code" href="interface_shotgun_request.html#a435c6bcf0ec69c6b8afcf275bfb2aff2">00065</a> <span class="keyword">@property</span> (copy, readwrite, nonatomic) ShotgunRequestBlock <a class="code" href="interface_shotgun_request.html#a435c6bcf0ec69c6b8afcf275bfb2aff2" title="The block called when the request is started.">startedBlock</a>; 
+<a name="l00066"></a><a class="code" href="interface_shotgun_request.html#aac110c5fd0df54f3caca020d830df84e">00066</a> <span class="keyword">@property</span> (copy, readwrite, nonatomic) ShotgunRequestBlock <a class="code" href="interface_shotgun_request.html#aac110c5fd0df54f3caca020d830df84e" title="The block called when the request completes.">completionBlock</a>; 
+<a name="l00067"></a><a class="code" href="interface_shotgun_request.html#a5479a78e839e6acc28ac165ee1bffd50">00067</a> <span class="keyword">@property</span> (copy, readwrite, nonatomic) ShotgunRequestBlock <a class="code" href="interface_shotgun_request.html#a5479a78e839e6acc28ac165ee1bffd50" title="The block called when the request errors.">failedBlock</a>; 
+<a name="l00068"></a>00068 
+<a name="l00069"></a><a class="code" href="interface_shotgun_request.html#a7cec0fca3cbf207ef8a30dcc3f71f6c4">00069</a> <span class="keyword">@property</span> (assign, readonly, nonatomic) BOOL <a class="code" href="interface_shotgun_request.html#a7cec0fca3cbf207ef8a30dcc3f71f6c4" title="Whether the Operation is finished or not.">isFinished</a>; 
+<a name="l00070"></a><a class="code" href="interface_shotgun_request.html#ac31a84b4849474ab542af5336a14cfb9">00070</a> <span class="keyword">@property</span> (assign, readonly, nonatomic) BOOL <a class="code" href="interface_shotgun_request.html#ac31a84b4849474ab542af5336a14cfb9" title="Whether the Operation is running or not.">isExecuting</a>; 
+<a name="l00071"></a>00071 
+<a name="l00072"></a>00072 <span class="keyword">@end</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -120,7 +122,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Jun 23 2011 18:12:30 for Shotgun ObjC Api by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jun 27 2011 16:35:32 for Shotgun ObjC Api by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

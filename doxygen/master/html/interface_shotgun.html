@@ -95,6 +95,9 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">(NSNumber *)&#160;</td><td class="memItemRight" valign="bottom">- <a class="el" href="interface_shotgun.html#a657afa4139359ca8f8399cc5eb2ab917">uploadThumbnailForEntityOfType:withId:fromPath:</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">(NSNumber *)&#160;</td><td class="memItemRight" valign="bottom">- <a class="el" href="interface_shotgun.html#ac3cd8bcc493d42c0ed1c73238523f650">uploadForEntityOfType:withId:fromPath:forField:withDisplayName:andTagList:</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">(NSData *)&#160;</td><td class="memItemRight" valign="bottom">- <a class="el" href="interface_shotgun.html#a1d0c0f755088039d4d09b37656f1802d">downloadAttachmentWithId:</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">(NSString *)&#160;</td><td class="memItemRight" valign="bottom">- <a class="el" href="interface_shotgun.html#a3080f8ae676e2637c92ce47bd1ec47f9">thumbnailUrlForEntity:</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">(void)&#160;</td><td class="memItemRight" valign="bottom">- <a class="el" href="interface_shotgun.html#ad18b6e81ac7ee3e4ef3b882d0d692be6">thumbnailForEntity:withBlock:</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Does what processing is needed to download the thumbnail for this entity asynchronously.  <a href="#ad18b6e81ac7ee3e4ef3b882d0d692be6"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">(id)&#160;</td><td class="memItemRight" valign="bottom">+ <a class="el" href="interface_shotgun.html#a0df2794ff521d7ae23a3044bdb622c00">shotgunWithUrl:scriptName:andKey:</a></td></tr>
@@ -627,6 +630,69 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ad18b6e81ac7ee3e4ef3b882d0d692be6"></a><!-- doxytag: member="Shotgun::thumbnailForEntity:withBlock:" ref="ad18b6e81ac7ee3e4ef3b882d0d692be6" args="(ShotgunEntity *entity,[withBlock] ThumbnailBlock block)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">- (void) thumbnailForEntity: </td>
+          <td></td>
+          <td class="paramtype">(<a class="el" href="interface_shotgun_entity.html">ShotgunEntity</a> *)&#160;</td>
+          <td class="paramname"><em>entity</em></td>
+        </tr>
+        <tr>
+          <td class="paramkey">withBlock:</td>
+          <td></td>
+          <td class="paramtype">(ThumbnailBlock)&#160;</td>
+          <td class="paramname"><em>block</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Does what processing is needed to download the thumbnail for this entity asynchronously. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td>A <a class="el" href="interface_shotgun_entity.html" title="Represents a Shotgun entity.">ShotgunEntity</a> to download the thumbnail for. </td></tr>
+    <tr><td class="paramname">block</td><td>A ThumbnailBlock that will be run on the resulting UIImage. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>The image field on <code>entity</code> will be filled out as a side effect, so entity should be declared __block. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a3080f8ae676e2637c92ce47bd1ec47f9"></a><!-- doxytag: member="Shotgun::thumbnailUrlForEntity:" ref="a3080f8ae676e2637c92ce47bd1ec47f9" args="(ShotgunEntity *entity)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">- (NSString *) thumbnailUrlForEntity: </td>
+          <td></td>
+          <td class="paramtype">(<a class="el" href="interface_shotgun_entity.html">ShotgunEntity</a> *)&#160;</td>
+          <td class="paramname"><em>entity</em></td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Returns the url to the thumbnail for this entity.</p>
+<p>This is the equivalent of having "image" filled out when finding the entity, which incurs a round trip to Shotgun per entity retrieved. This method lets you control when that round trip happens.</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td>A <a class="el" href="interface_shotgun_entity.html" title="Represents a Shotgun entity.">ShotgunEntity</a> representing the entity to return the url to the thumbnail of. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>an NSString that is the string form of the url to the thumbnail of <code>entity</code>. </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a447d1c9e3ffb9f413e0d82254487205b"></a><!-- doxytag: member="Shotgun::updateEntityOfType:withId:withData:" ref="a447d1c9e3ffb9f413e0d82254487205b" args="(NSString *entityType,[withId] NSNumber *entityId,[withData] id data)" -->
 <div class="memitem">
 <div class="memproto">
@@ -775,7 +841,7 @@ Static Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Jun 23 2011 18:12:30 for Shotgun ObjC Api by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jun 27 2011 16:35:32 for Shotgun ObjC Api by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
