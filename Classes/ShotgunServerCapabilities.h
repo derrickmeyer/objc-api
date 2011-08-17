@@ -9,7 +9,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ServerCapabilities : NSObject
+@interface ShotgunServerCapabilities : NSObject
 
 @property (assign, readonly, nonatomic) BOOL isDev;
 @property (assign, readonly, nonatomic) BOOL hasPaging;
@@ -17,6 +17,5 @@
 
 + (id)serverCapabilitiesWithHost:(NSString *)host andMeta:(NSDictionary *)meta;
 - (id)initWithHost:(NSString *)host andMeta:(NSDictionary *)meta;
-- (void)dealloc;
 
 @end

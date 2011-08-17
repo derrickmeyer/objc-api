@@ -9,13 +9,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ClientCapabilities : NSObject
+@interface ShotgunClientCapabilities : NSObject
 
 @property (retain, readwrite, nonatomic) NSString *platform;
 @property (retain, readwrite, nonatomic) NSString *localPathField;
 
 + (id) clientCapabilities;
 - (id) init;
-- (void) dealloc;
 
 @end

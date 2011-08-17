@@ -106,6 +106,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5C2B96E213FB4D7A009D0A9C /* Docs */ = {
+			isa = PBXGroup;
+			children = (
+				5CB00EBD13FB280D003C51AA /* Mainpage.dox */,
+			);
+			name = Docs;
+			path = "shotgun-api";
+			sourceTree = "<group>";
+		};
 		5C2DD93F13E0E56200C043B7 /* Required Dependencies */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,6 +159,7 @@
 		5CCE3D7D13DF970F0071F02F = {
 			isa = PBXGroup;
 			children = (
+				5C2B96E213FB4D7A009D0A9C /* Docs */,
 				5CCE3D8D13DF97100071F02F /* Classes */,
 				5CCE3D8A13DF97100071F02F /* Frameworks */,
 				5C2DD93F13E0E56200C043B7 /* Required Dependencies */,
@@ -177,7 +187,6 @@
 		5CCE3D8D13DF97100071F02F /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				5CB00EBD13FB280D003C51AA /* Mainpage.dox */,
 				5CCE3D9C13DF97B70071F02F /* Shotgun.h */,
 				5CCE3D9D13DF97B70071F02F /* Shotgun.m */,
 				5CCE3D9E13DF97B70071F02F /* ShotgunClientCapabilities.h */,

@@ -7,16 +7,16 @@
 //
 /// @file ClientCapabilities.m Implementation of ClientCapabilities
 
-#import "ClientCapabilities.h"
+#import "ShotgunClientCapabilities.h"
 
-@implementation ClientCapabilities
+@implementation ShotgunClientCapabilities
 
 @synthesize platform = platform_;
 @synthesize localPathField = localPathField_;
 
 + (id)clientCapabilities
 {
-    return [[[ClientCapabilities alloc] init] autorelease];
+    return [[ShotgunClientCapabilities alloc] init];
 }
 
 - (id)init {
@@ -28,11 +28,5 @@
     return self;
 }
 
-- (void)dealloc
-{
-    self.platform = Nil;
-    self.localPathField = Nil;
-    [super dealloc];
-}
 
 @end

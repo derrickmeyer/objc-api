@@ -7,9 +7,9 @@
 //
 /// @file ServerCapabilities.m Implementation of ServerCapabilities
 
-#import "ServerCapabilities.h"
+#import "ShotgunServerCapabilities.h"
 
-@interface ServerCapabilities ()
+@interface ShotgunServerCapabilities ()
 
 @property (assign, readwrite, nonatomic) BOOL isDev;
 @property (assign, readwrite, nonatomic) BOOL hasPaging;
@@ -20,7 +20,7 @@
 
 @end
 
-@implementation ServerCapabilities
+@implementation ShotgunServerCapabilities
 
 @synthesize isDev = isDev_;
 @synthesize hasPaging = hasPaging_;
@@ -28,7 +28,7 @@
 
 + (id)serverCapabilitiesWithHost:(NSString *)host andMeta:(NSDictionary *)meta
 {
-    return [[[ServerCapabilities alloc] initWithHost:host andMeta:meta] autorelease];
+    return [[ShotgunServerCapabilities alloc] initWithHost:host andMeta:meta];
 }
 
 -(id) initWithHost:(NSString *)host andMeta:(NSDictionary *)meta {
@@ -41,11 +41,11 @@
                 self.isDev = [[self.version objectAtIndex:3] isEqualToString:@"Dev"];
         } else {
             self.isDev = NO;
-            self.version = [[[NSArray alloc] initWithObjects:
+            self.version = [[NSArray alloc] initWithObjects:
                         [NSNumber numberWithInt:0],
                         [NSNumber numberWithInt:0],
                         [NSNumber numberWithInt:0],
-                        nil] autorelease];
+                        nil];
         }
         [self ensureJSONSupported_];
         self.hasPaging = [self isPaging_];
@@ -71,10 +71,5 @@
     return NO;
 }
 
-- (void)dealloc
-{
-    self.version = Nil;
-    [super dealloc];
-}
 
 @end
