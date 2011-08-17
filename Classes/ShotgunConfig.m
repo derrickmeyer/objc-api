@@ -25,7 +25,7 @@
 
 + (id)config
 {
-    return [[[ShotgunConfig alloc] init] autorelease];
+    return [[ShotgunConfig alloc] init];
 }
 
 - (id)init 
@@ -47,17 +47,5 @@
     return self;
 }
 
-- (void)dealloc 
-{
-    self.apiVer = Nil;
-    self.apiKey = Nil;
-    self.scheme = Nil;
-    self.server = Nil;
-    self.apiPath = Nil;
-    self.scriptName = Nil;
-    self.sessionUuid = Nil;
-    self.sessionToken = Nil;
-    [super dealloc];
-}
 
 @end

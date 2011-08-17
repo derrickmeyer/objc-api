@@ -26,6 +26,5 @@
 
 + (id)config;
 - (id)init;
-- (void)dealloc;
 
 @end

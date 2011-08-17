@@ -18,7 +18,7 @@
 #endif
 
 #ifdef DEBUG
-  #define SG_NSLOG_LEVEL ASL_LEVEL_INFO
+  #define SG_NSLOG_LEVEL ASL_LEVEL_DEBUG
 #else
   #define SG_NSLOG_LEVEL ASL_LEVEL_WARNING
 #endif

@@ -81,7 +81,7 @@ static NSOperationQueue *sharedQueue = Nil;
 
 + (id)shotgunRequestWithConfig:(ShotgunConfig *)config path:(NSString *)path body:(NSString *)body headers:(NSDictionary *)headers andHTTPMethod:(NSString *)method
 {
-    return [[[ShotgunRequest alloc] initWithConfig:config path:path body:body headers:headers andHTTPMethod:method] autorelease];
+    return [[ShotgunRequest alloc] initWithConfig:config path:path body:body headers:headers andHTTPMethod:method];
 }
 
 + (NSOperationQueue *)sharedQueue
@@ -120,7 +120,7 @@ static NSOperationQueue *sharedQueue = Nil;
     self.maxAttempts = self.config.maxRpcAttempts;
     self.timeout = self.config.timeoutSecs;
     self.request = [self makeRequest];
-    NSString *body = [[[NSString alloc] initWithData:[self.request postBody] encoding:NSUTF8StringEncoding] autorelease];
+    NSString *body = [[NSString alloc] initWithData:[self.request postBody] encoding:NSUTF8StringEncoding];
     SG_INFO(@"\nStarting %@ request %@ with body\n-----------------------\n%@\n-----------------------",
             synchronous ? @"synchronous" : @"asynchronous",
             [self.request requestID],
@@ -183,9 +183,9 @@ static NSOperationQueue *sharedQueue = Nil;
         return;
     }
 
-    self.response = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+    self.response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     if (self.postProcessBlock)
-        self.response = [self.postProcessBlock([self.request responseHeaders], self.response) retain];
+        self.response = self.postProcessBlock([self.request responseHeaders], self.response);
     SG_INFO(@"Finished request %@", [self.request requestID]);
     SG_DEBUG(@"Response status is %d %@", [self.request responseStatusCode], [self.request responseStatusMessage]);
     SG_DEBUG(@"Response headers are %@", [self.request responseHeaders]);
@@ -217,7 +217,7 @@ static NSOperationQueue *sharedQueue = Nil;
 
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
-    NSString *body = [[[NSString alloc] initWithData:[self.request postBody] encoding:NSUTF8StringEncoding] autorelease];
+    NSString *body = [[NSString alloc] initWithData:[self.request postBody] encoding:NSUTF8StringEncoding];
     SG_INFO(@"ASYNC Failed (current %d): %@\n%@\n-----------\n%@\n----------", self.currentAttempt, [request requestID], [request error], body);
     /// @todo Set class error
     if (self.currentAttempt < self.maxAttempts) {
@@ -230,24 +230,10 @@ static NSOperationQueue *sharedQueue = Nil;
     [self finishSynchronous:NO];
 }
 
-- (void)dealloc
-{
-    self.response = Nil;
-    self.request = Nil;
-    self.error = Nil;
-    self.queue = Nil;
-    self.config = Nil;
-    self.path = Nil;
-    self.body = Nil;
-    self.headers = Nil;
-    self.method = Nil;
-    // Blocks are deleted automatically when execution returns from the defining scope.
-    [super dealloc];
-}
 
 - (ASIHTTPRequest *)makeRequest
 {
-    NSURL *url = [[[NSURL alloc] initWithScheme:self.config.scheme host:self.config.server path:self.path] autorelease];
+    NSURL *url = [[NSURL alloc] initWithScheme:self.config.scheme host:self.config.server path:self.path];
     ASIHTTPRequest *aRequest = [ASIHTTPRequest requestWithURL:url];
     [aRequest setUserAgent:@"shotgun-json"];
     [aRequest setPostBody:[NSMutableData dataWithData:[self.body dataUsingEncoding:NSUTF8StringEncoding]]];

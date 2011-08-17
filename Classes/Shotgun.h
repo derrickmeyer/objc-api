@@ -15,6 +15,7 @@
 #import "ShotgunEntity.h"
 #import "ShotgunRequest.h"
 
+
 /**
  * Represents a connection to a shotgun server.
  *

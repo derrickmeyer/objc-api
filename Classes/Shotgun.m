@@ -13,8 +13,8 @@
 
 #import "ShotgunLogging.h"
 #import "ShotgunConfig.h"
-#import "ServerCapabilities.h"
-#import "ClientCapabilities.h"
+#import "ShotgunServerCapabilities.h"
+#import "ShotgunClientCapabilities.h"
 
 #import "Shotgun.h"
 #import "ShotgunRequestPrivate.h"
@@ -22,8 +22,8 @@
 @interface Shotgun()
 
 @property (readwrite, nonatomic, retain) ShotgunConfig *config;
-@property (readwrite, nonatomic, retain) ServerCapabilities *serverCaps;
-@property (readwrite, nonatomic, retain) ClientCapabilities *clientCaps;
+@property (readwrite, nonatomic, retain) ShotgunServerCapabilities *serverCaps;
+@property (readwrite, nonatomic, retain) ShotgunClientCapabilities *clientCaps;
 
 - (ShotgunRequest *)requestWithMethod_:(NSString *)method andParams:(id)params;
 - (ShotgunRequest *)requestWithMethod_:(NSString *)method params:(id)params includeScriptName:(BOOL)includeScriptName returnFirst:(BOOL)first;
@@ -56,7 +56,7 @@
 
 + (id)shotgunWithUrl:(NSString *)url scriptName:(NSString *)scriptName andKey:(NSString *)key
 {
-    return [[[Shotgun alloc] initWithUrl:url scriptName:scriptName andKey:key] autorelease];
+    return [[Shotgun alloc] initWithUrl:url scriptName:scriptName andKey:key];
 }
 
 - (id)initWithUrl:(NSString *)url scriptName:(NSString *)scriptName andKey:(NSString *)key
@@ -83,11 +83,11 @@
         [req startSynchronous];
         NSDictionary *info = [req response];
         if (info)
-            self.serverCaps = [ServerCapabilities serverCapabilitiesWithHost:self.config.server andMeta:info];
+            self.serverCaps = [ShotgunServerCapabilities serverCapabilitiesWithHost:self.config.server andMeta:info];
         else
             return Nil;
         // Get and check client capabilities
-        self.clientCaps = [ClientCapabilities clientCapabilities];
+        self.clientCaps = [ShotgunClientCapabilities clientCapabilities];
     }
     return self;
 }
@@ -193,12 +193,23 @@
         [NSException raise:@"Value Error" format:@"Invalid fields: %@", fields];
     if ((checkedOrder != Nil) && ![checkedOrder isKindOfClass:[NSArray class]])
         [NSException raise:@"Value Error" format:@"Invalid order: %@", order];
-        
+    
+    // For fields if a field traverses a path (contains a '.') always request the local field
+    // being traversed along with the remainder of the path, so we know which entity the path
+    // refers to
+    NSMutableArray *translatedFields = [NSMutableArray array];
+    for (NSString *field in checkedFields) {
+        [translatedFields addObject:field];
+        NSRange firstPeriod = [field rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:@"."]];
+        if (firstPeriod.location != NSNotFound)
+            [translatedFields addObject:[field substringToIndex:firstPeriod.location]];
+    }
+    
     // Inital parameters
-    __block NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+    __unsafe_unretained NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                         entityType, @"type",
                                         checkedFilters, @"filters",
-                                        checkedFields, @"return_fields",
+                                        translatedFields, @"return_fields",
                                         retiredOnly ? @"retired" : @"active", @"return_only",
                                         [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                                 [NSNumber numberWithUnsignedInteger:self.config.recordsPerPage], @"entities_per_page",
@@ -256,7 +267,7 @@
     // Get as many pages as needed
     ShotgunRequest *request = [self requestWithMethod_:@"read" andParams:params];
     ShotgunPostProcessBlock oldPost = [request postProcessBlock];
-    [params retain]; // Make sure params sticks around until we are done
+     // Make sure params sticks around until we are done
     [request setPostProcessBlock:^id (NSDictionary *headers, NSString *body) {
         NSDictionary *result = oldPost(headers, body);
         NSArray *entities = [result objectForKey:@"entities"];
@@ -279,7 +290,7 @@
             result = [nextPageRequest response];
             entities = [result objectForKey:@"entities"];
         }
-        [params release]; // Now all done with params, let the autorelease pool do its thing.
+         // Now all done with params, let the autorelease pool do its thing.
         NSArray *ret = [self parseRecords_:returnRecords];
         return ret;
     }];
@@ -304,7 +315,7 @@
         NSString *path = [parts objectAtIndex:1];
         if ([path length] == 0)
             return path;
-        NSURL *url = [[[NSURL alloc] initWithScheme:self.config.scheme host:self.config.server path:[parts objectAtIndex:1]] autorelease];
+        NSURL *url = [[NSURL alloc] initWithScheme:self.config.scheme host:self.config.server path:[parts objectAtIndex:1]];
         return [url absoluteString];
         
     }
@@ -316,7 +327,7 @@
 {
     NSString *url = [entity objectForKey:@"image"];
     if (url == Nil) {
-        __block ShotgunEntity* blockEntity = entity;
+        __unsafe_unretained ShotgunEntity* blockEntity = entity;
         [[ShotgunRequest sharedQueue] addOperationWithBlock:^{
             NSString *thumbUrl = [self thumbnailUrlForEntity:entity];
             if (thumbUrl == Nil) { 
@@ -331,9 +342,8 @@
             NSURL *aURL = [NSURL URLWithString:thumbUrl];
             ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:aURL];
             [request startSynchronous];
-            UIImage *image = [[UIImage imageWithData:[request responseData]] retain];
+            UIImage *image = [UIImage imageWithData:[request responseData]];
             block(image);
-            [image release];
         }];
         return;
     }
@@ -347,9 +357,8 @@
         NSURL *aURL = [NSURL URLWithString:url];
         ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:aURL];
         [request startSynchronous];
-        UIImage *image = [[UIImage imageWithData:[request responseData]] retain];
+        UIImage *image = [UIImage imageWithData:[request responseData]];
         block(image);
-        [image release];
     }];
 }
 
@@ -574,11 +583,11 @@
     NSURL *url;
     ASIFormDataRequest *request;
     if (isThumbnail) {
-        url = [[[NSURL alloc] initWithScheme:self.config.scheme host:self.config.server path:@"/upload/publish_thumbnail"] autorelease];
+        url = [[NSURL alloc] initWithScheme:self.config.scheme host:self.config.server path:@"/upload/publish_thumbnail"];
         request = [ASIFormDataRequest requestWithURL:url];
         [request setFile:path forKey:@"thumb_image"];
     } else {
-        url = [[[NSURL alloc] initWithScheme:self.config.scheme host:self.config.server path:@"/upload/upload_file"] autorelease];
+        url = [[NSURL alloc] initWithScheme:self.config.scheme host:self.config.server path:@"/upload/upload_file"];
         request = [ASIFormDataRequest requestWithURL:url];
         if (displayName == Nil)
             displayName = [path lastPathComponent];
@@ -616,7 +625,7 @@
     NSArray *splitResponse = [response componentsSeparatedByString:@":"];
     if ([splitResponse count] <= 1)
         return [NSNumber numberWithInt:0];
-    NSNumberFormatter *formatter = [[[NSNumberFormatter alloc] init] autorelease];
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     NSArray *splitValue = [[splitResponse objectAtIndex:1] componentsSeparatedByString:@"\n"];
     [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
     return [formatter numberFromString:[splitValue objectAtIndex:0]];
@@ -627,7 +636,7 @@
     NSString *sessionId = [self getSessionToken_];
     
     NSString *path = [NSString stringWithFormat:@"/file_serve/%@", attachmentId];
-    NSURL *url = [[[NSURL alloc] initWithScheme:self.config.scheme host:self.config.server path:path] autorelease];
+    NSURL *url = [[NSURL alloc] initWithScheme:self.config.scheme host:self.config.server path:path];
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     [request setUserAgent:@"Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; " \
         "rv:1.9.0.7) Gecko/2009021906 Firefox/3.0.7"];
@@ -647,16 +656,6 @@
          url, [error code], [error description]];
     NSData *ret = [request responseData];
     return ret;
-}
-
-#pragma mark - Destruction
-
-- (void)dealloc 
-{
-    self.clientCaps = Nil;
-    self.serverCaps = Nil;
-    self.config = Nil;
-    [super dealloc];
 }
 
 #pragma mark - Private Category Methods
@@ -741,7 +740,7 @@
     if (records == Nil)
         return ret;
     NSArray *iteratee;
-    NSOperationQueue *queue = [[[NSOperationQueue alloc] init] autorelease];
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [queue setMaxConcurrentOperationCount:4];
     queue.name = @"Thumbnail Converting Queue";
     if (![records isKindOfClass:[NSArray class]])
@@ -834,11 +833,11 @@
         if ([value isKindOfClass:[NSDate class]]) {
             NSString *ret = Nil;
             if ([value isKindOfClass:[ShotgunDateTime class]]) {
-                NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
                 [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
                 ret = [formatter stringFromDate:value];
             } else if ([value isKindOfClass:[ShotgunDate class]]) {
-                NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
                 [formatter setDateFormat:@"yyyy-MM-dd"];
                 ret = [formatter stringFromDate:value];
             } else {
@@ -857,11 +856,13 @@
     id(^inboundVisitor)(id) = ^(id value) {
         if ([value isKindOfClass:[NSString class]]) {
             if([value length] == 20) {
-                NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
                 [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
                 NSDate *convertedDate = [formatter dateFromString:value];
-                ShotgunDateTime *date = [ShotgunDateTime dateTimeWithDate:convertedDate];
-                return date ? date : value;
+                if (convertedDate == Nil)
+                    return value;
+                id date = [ShotgunDateTime dateTimeWithDate:convertedDate];
+                return date;
             }
         }
         return value;

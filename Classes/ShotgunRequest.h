@@ -56,8 +56,6 @@ typedef id (^ShotgunPostProcessBlock)(NSDictionary *, NSString *);
 /** Start the connection */
 - (void)startAsynchronous;
 
-- (void)dealloc;
-
 @property (retain, readonly, nonatomic) id response; ///< The return value of the request
 @property (retain, readonly, nonatomic) NSError *error; ///< The value of an error if it occurred.
 

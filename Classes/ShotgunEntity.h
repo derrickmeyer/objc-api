@@ -3,11 +3,13 @@
 //  UnitTests
 //
 //  Created by Rob Blau on 6/15/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 Laika. All rights reserved.
 //
 /// @file ShotgunEntity.h Interface for a wrapper around dictionaries for Shotgun logic.
 
 #import <Foundation/Foundation.h>
+
+#import <UIKit/UIImage.h>
 
 /// @typedef A block taking an UIImage
 typedef void (^ThumbnailBlock)(UIImage *);
@@ -28,6 +30,5 @@ typedef void (^ThumbnailBlock)(UIImage *);
 
 - (id)init;
 - (id)initWithJSON:(NSString *)json;
-- (void)dealloc;
 
 @end

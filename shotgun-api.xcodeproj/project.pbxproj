@@ -1,0 +1,423 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5CCE3D8C13DF97100071F02F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CCE3D8B13DF97100071F02F /* Foundation.framework */; };
+		5CCE3DAE13DF97B70071F02F /* Shotgun.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CCE3D9C13DF97B70071F02F /* Shotgun.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5CCE3DAF13DF97B70071F02F /* Shotgun.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE3D9D13DF97B70071F02F /* Shotgun.m */; };
+		5CCE3DB013DF97B70071F02F /* ShotgunClientCapabilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CCE3D9E13DF97B70071F02F /* ShotgunClientCapabilities.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		5CCE3DB113DF97B70071F02F /* ShotgunClientCapabilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE3D9F13DF97B70071F02F /* ShotgunClientCapabilities.m */; };
+		5CCE3DB213DF97B70071F02F /* ShotgunConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CCE3DA013DF97B70071F02F /* ShotgunConfig.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		5CCE3DB313DF97B70071F02F /* ShotgunConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE3DA113DF97B70071F02F /* ShotgunConfig.m */; };
+		5CCE3DB413DF97B70071F02F /* ShotgunDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CCE3DA213DF97B70071F02F /* ShotgunDate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5CCE3DB513DF97B70071F02F /* ShotgunDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE3DA313DF97B70071F02F /* ShotgunDate.m */; };
+		5CCE3DB613DF97B70071F02F /* ShotgunEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CCE3DA413DF97B70071F02F /* ShotgunEntity.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5CCE3DB713DF97B70071F02F /* ShotgunEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE3DA513DF97B70071F02F /* ShotgunEntity.m */; };
+		5CCE3DBA13DF97B70071F02F /* ShotgunLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CCE3DA813DF97B70071F02F /* ShotgunLogging.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		5CCE3DBB13DF97B70071F02F /* ShotgunRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CCE3DA913DF97B70071F02F /* ShotgunRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5CCE3DBC13DF97B70071F02F /* ShotgunRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE3DAA13DF97B70071F02F /* ShotgunRequest.m */; };
+		5CCE3DBD13DF97B70071F02F /* ShotgunRequestPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CCE3DAB13DF97B70071F02F /* ShotgunRequestPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		5CCE3DBE13DF97B70071F02F /* ShotgunServerCapabilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CCE3DAC13DF97B70071F02F /* ShotgunServerCapabilities.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		5CCE3DBF13DF97B70071F02F /* ShotgunServerCapabilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE3DAD13DF97B70071F02F /* ShotgunServerCapabilities.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5C2DD95D13E0E58F00C043B7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C2DD95313E0E58E00C043B7 /* SBJson.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BC12323D1391D5CC00131607;
+			remoteInfo = SBJson;
+		};
+		5C2DD95F13E0E58F00C043B7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C2DD95313E0E58E00C043B7 /* SBJson.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BC1232521391D5CC00131607;
+			remoteInfo = SBJsonTests;
+		};
+		5C2DD96113E0E58F00C043B7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C2DD95313E0E58E00C043B7 /* SBJson.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BCC2626913920FC7003D9994;
+			remoteInfo = "sbjson-ios";
+		};
+		5C2DD96313E0E58F00C043B7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C2DD95313E0E58E00C043B7 /* SBJson.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BCC2627313920FC7003D9994;
+			remoteInfo = "sbjson-iosTests";
+		};
+		5C94B80513E1E681007B6C7F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C94B7FE13E1E681007B6C7F /* asi-http-request.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5C94B67813E1E15C007B6C7F;
+			remoteInfo = "asi-http-request";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5C2DD95313E0E58E00C043B7 /* SBJson.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SBJson.xcodeproj; path = "Dependencies/json-framework/SBJson.xcodeproj"; sourceTree = "<group>"; };
+		5C94B7F113E1E5AD007B6C7F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		5C94B7F413E1E5FB007B6C7F /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		5C94B7F613E1E606007B6C7F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		5C94B7F813E1E612007B6C7F /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		5C94B7FA13E1E61C007B6C7F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		5C94B7FC13E1E62E007B6C7F /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
+		5C94B7FE13E1E681007B6C7F /* asi-http-request.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "asi-http-request.xcodeproj"; path = "Dependencies/asi-http-request.xcodeproj"; sourceTree = "<group>"; };
+		5CB00EBD13FB280D003C51AA /* Mainpage.dox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Mainpage.dox; path = Docs/Mainpage.dox; sourceTree = SOURCE_ROOT; };
+		5CCE3D8813DF97100071F02F /* libshotgun-api.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libshotgun-api.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5CCE3D8B13DF97100071F02F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		5CCE3D9C13DF97B70071F02F /* Shotgun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Shotgun.h; path = Classes/Shotgun.h; sourceTree = SOURCE_ROOT; };
+		5CCE3D9D13DF97B70071F02F /* Shotgun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Shotgun.m; path = Classes/Shotgun.m; sourceTree = SOURCE_ROOT; };
+		5CCE3D9E13DF97B70071F02F /* ShotgunClientCapabilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShotgunClientCapabilities.h; path = Classes/ShotgunClientCapabilities.h; sourceTree = SOURCE_ROOT; };
+		5CCE3D9F13DF97B70071F02F /* ShotgunClientCapabilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShotgunClientCapabilities.m; path = Classes/ShotgunClientCapabilities.m; sourceTree = SOURCE_ROOT; };
+		5CCE3DA013DF97B70071F02F /* ShotgunConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShotgunConfig.h; path = Classes/ShotgunConfig.h; sourceTree = SOURCE_ROOT; };
+		5CCE3DA113DF97B70071F02F /* ShotgunConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShotgunConfig.m; path = Classes/ShotgunConfig.m; sourceTree = SOURCE_ROOT; };
+		5CCE3DA213DF97B70071F02F /* ShotgunDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShotgunDate.h; path = Classes/ShotgunDate.h; sourceTree = SOURCE_ROOT; };
+		5CCE3DA313DF97B70071F02F /* ShotgunDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShotgunDate.m; path = Classes/ShotgunDate.m; sourceTree = SOURCE_ROOT; };
+		5CCE3DA413DF97B70071F02F /* ShotgunEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShotgunEntity.h; path = Classes/ShotgunEntity.h; sourceTree = SOURCE_ROOT; };
+		5CCE3DA513DF97B70071F02F /* ShotgunEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShotgunEntity.m; path = Classes/ShotgunEntity.m; sourceTree = SOURCE_ROOT; };
+		5CCE3DA813DF97B70071F02F /* ShotgunLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShotgunLogging.h; path = Classes/ShotgunLogging.h; sourceTree = SOURCE_ROOT; };
+		5CCE3DA913DF97B70071F02F /* ShotgunRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShotgunRequest.h; path = Classes/ShotgunRequest.h; sourceTree = SOURCE_ROOT; };
+		5CCE3DAA13DF97B70071F02F /* ShotgunRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShotgunRequest.m; path = Classes/ShotgunRequest.m; sourceTree = SOURCE_ROOT; };
+		5CCE3DAB13DF97B70071F02F /* ShotgunRequestPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShotgunRequestPrivate.h; path = Classes/ShotgunRequestPrivate.h; sourceTree = SOURCE_ROOT; };
+		5CCE3DAC13DF97B70071F02F /* ShotgunServerCapabilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShotgunServerCapabilities.h; path = Classes/ShotgunServerCapabilities.h; sourceTree = SOURCE_ROOT; };
+		5CCE3DAD13DF97B70071F02F /* ShotgunServerCapabilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShotgunServerCapabilities.m; path = Classes/ShotgunServerCapabilities.m; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5CCE3D8513DF97100071F02F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5CCE3D8C13DF97100071F02F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5C2DD93F13E0E56200C043B7 /* Required Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				5C94B7FE13E1E681007B6C7F /* asi-http-request.xcodeproj */,
+				5C2DD95313E0E58E00C043B7 /* SBJson.xcodeproj */,
+			);
+			name = "Required Dependencies";
+			sourceTree = "<group>";
+		};
+		5C2DD95413E0E58E00C043B7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5C2DD95E13E0E58F00C043B7 /* SBJson.framework */,
+				5C2DD96013E0E58F00C043B7 /* SBJsonTests.octest */,
+				5C2DD96213E0E58F00C043B7 /* libsbjson-ios.a */,
+				5C2DD96413E0E58F00C043B7 /* sbjson-iosTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5C94B7F313E1E5CC007B6C7F /* Required Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5C94B7FC13E1E62E007B6C7F /* libz.1.2.5.dylib */,
+				5C94B7FA13E1E61C007B6C7F /* CoreGraphics.framework */,
+				5C94B7F813E1E612007B6C7F /* MobileCoreServices.framework */,
+				5C94B7F613E1E606007B6C7F /* SystemConfiguration.framework */,
+				5C94B7F413E1E5FB007B6C7F /* CFNetwork.framework */,
+				5C94B7F113E1E5AD007B6C7F /* UIKit.framework */,
+			);
+			name = "Required Frameworks";
+			sourceTree = "<group>";
+		};
+		5C94B7FF13E1E681007B6C7F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5C94B80613E1E681007B6C7F /* libasi-http-request.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5CCE3D7D13DF970F0071F02F = {
+			isa = PBXGroup;
+			children = (
+				5CCE3D8D13DF97100071F02F /* Classes */,
+				5CCE3D8A13DF97100071F02F /* Frameworks */,
+				5C2DD93F13E0E56200C043B7 /* Required Dependencies */,
+				5C94B7F313E1E5CC007B6C7F /* Required Frameworks */,
+				5CCE3D8913DF97100071F02F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5CCE3D8913DF97100071F02F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5CCE3D8813DF97100071F02F /* libshotgun-api.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5CCE3D8A13DF97100071F02F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5CCE3D8B13DF97100071F02F /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5CCE3D8D13DF97100071F02F /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				5CB00EBD13FB280D003C51AA /* Mainpage.dox */,
+				5CCE3D9C13DF97B70071F02F /* Shotgun.h */,
+				5CCE3D9D13DF97B70071F02F /* Shotgun.m */,
+				5CCE3D9E13DF97B70071F02F /* ShotgunClientCapabilities.h */,
+				5CCE3D9F13DF97B70071F02F /* ShotgunClientCapabilities.m */,
+				5CCE3DA013DF97B70071F02F /* ShotgunConfig.h */,
+				5CCE3DA113DF97B70071F02F /* ShotgunConfig.m */,
+				5CCE3DA213DF97B70071F02F /* ShotgunDate.h */,
+				5CCE3DA313DF97B70071F02F /* ShotgunDate.m */,
+				5CCE3DA413DF97B70071F02F /* ShotgunEntity.h */,
+				5CCE3DA513DF97B70071F02F /* ShotgunEntity.m */,
+				5CCE3DA813DF97B70071F02F /* ShotgunLogging.h */,
+				5CCE3DA913DF97B70071F02F /* ShotgunRequest.h */,
+				5CCE3DAA13DF97B70071F02F /* ShotgunRequest.m */,
+				5CCE3DAB13DF97B70071F02F /* ShotgunRequestPrivate.h */,
+				5CCE3DAC13DF97B70071F02F /* ShotgunServerCapabilities.h */,
+				5CCE3DAD13DF97B70071F02F /* ShotgunServerCapabilities.m */,
+			);
+			name = Classes;
+			path = "shotgun-api";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		5CCE3D8613DF97100071F02F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5CCE3DAE13DF97B70071F02F /* Shotgun.h in Headers */,
+				5CCE3DB413DF97B70071F02F /* ShotgunDate.h in Headers */,
+				5CCE3DB613DF97B70071F02F /* ShotgunEntity.h in Headers */,
+				5CCE3DBB13DF97B70071F02F /* ShotgunRequest.h in Headers */,
+				5CCE3DB013DF97B70071F02F /* ShotgunClientCapabilities.h in Headers */,
+				5CCE3DB213DF97B70071F02F /* ShotgunConfig.h in Headers */,
+				5CCE3DBA13DF97B70071F02F /* ShotgunLogging.h in Headers */,
+				5CCE3DBD13DF97B70071F02F /* ShotgunRequestPrivate.h in Headers */,
+				5CCE3DBE13DF97B70071F02F /* ShotgunServerCapabilities.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		5CCE3D8713DF97100071F02F /* shotgun-api */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5CCE3D9513DF97100071F02F /* Build configuration list for PBXNativeTarget "shotgun-api" */;
+			buildPhases = (
+				5CCE3D8413DF97100071F02F /* Sources */,
+				5CCE3D8513DF97100071F02F /* Frameworks */,
+				5CCE3D8613DF97100071F02F /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "shotgun-api";
+			productName = "shotgun-api";
+			productReference = 5CCE3D8813DF97100071F02F /* libshotgun-api.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5CCE3D7F13DF970F0071F02F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = 5CCE3D8213DF970F0071F02F /* Build configuration list for PBXProject "shotgun-api" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				English,
+			);
+			mainGroup = 5CCE3D7D13DF970F0071F02F;
+			productRefGroup = 5CCE3D8913DF97100071F02F /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 5C94B7FF13E1E681007B6C7F /* Products */;
+					ProjectRef = 5C94B7FE13E1E681007B6C7F /* asi-http-request.xcodeproj */;
+				},
+				{
+					ProductGroup = 5C2DD95413E0E58E00C043B7 /* Products */;
+					ProjectRef = 5C2DD95313E0E58E00C043B7 /* SBJson.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				5CCE3D8713DF97100071F02F /* shotgun-api */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		5C2DD95E13E0E58F00C043B7 /* SBJson.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SBJson.framework;
+			remoteRef = 5C2DD95D13E0E58F00C043B7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5C2DD96013E0E58F00C043B7 /* SBJsonTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SBJsonTests.octest;
+			remoteRef = 5C2DD95F13E0E58F00C043B7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5C2DD96213E0E58F00C043B7 /* libsbjson-ios.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libsbjson-ios.a";
+			remoteRef = 5C2DD96113E0E58F00C043B7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5C2DD96413E0E58F00C043B7 /* sbjson-iosTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "sbjson-iosTests.octest";
+			remoteRef = 5C2DD96313E0E58F00C043B7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5C94B80613E1E681007B6C7F /* libasi-http-request.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libasi-http-request.a";
+			remoteRef = 5C94B80513E1E681007B6C7F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5CCE3D8413DF97100071F02F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5CCE3DAF13DF97B70071F02F /* Shotgun.m in Sources */,
+				5CCE3DB113DF97B70071F02F /* ShotgunClientCapabilities.m in Sources */,
+				5CCE3DB313DF97B70071F02F /* ShotgunConfig.m in Sources */,
+				5CCE3DB513DF97B70071F02F /* ShotgunDate.m in Sources */,
+				5CCE3DB713DF97B70071F02F /* ShotgunEntity.m in Sources */,
+				5CCE3DBC13DF97B70071F02F /* ShotgunRequest.m in Sources */,
+				5CCE3DBF13DF97B70071F02F /* ShotgunServerCapabilities.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		5CCE3D9313DF97100071F02F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "Dependencies/json-framework/Classes Dependencies/asi-http-request/Classes";
+			};
+			name = Debug;
+		};
+		5CCE3D9413DF97100071F02F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "Dependencies/json-framework/Classes Dependencies/asi-http-request/Classes";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5CCE3D9613DF97100071F02F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/objc_api.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		5CCE3D9713DF97100071F02F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/objc_api.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5CCE3D8213DF970F0071F02F /* Build configuration list for PBXProject "shotgun-api" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5CCE3D9313DF97100071F02F /* Debug */,
+				5CCE3D9413DF97100071F02F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5CCE3D9513DF97100071F02F /* Build configuration list for PBXNativeTarget "shotgun-api" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5CCE3D9613DF97100071F02F /* Debug */,
+				5CCE3D9713DF97100071F02F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5CCE3D7F13DF970F0071F02F /* Project object */;
+}

@@ -3,7 +3,7 @@
 //  UnitTests
 //
 //  Created by Rob Blau on 6/15/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 Laika. All rights reserved.
 //
 /// @file ShotgunEntity.m Implementation of ShotgunEntity objects.
 
@@ -13,7 +13,7 @@
 
 @interface ShotgunEntity()
 
-@property (assign, readwrite, nonatomic) NSMutableDictionary *internal;
+@property (retain, readwrite, nonatomic) NSMutableDictionary *internal;
 
 @end
 
@@ -25,12 +25,12 @@
 
 + (id)shotgunEntity
 {
-    return [[[ShotgunEntity alloc] init] autorelease]; 
+    return [[ShotgunEntity alloc] init]; 
 }
 
 + (id)shotgunEntityWithDictionary:(NSDictionary *)dictionary
 {
-    return [[[ShotgunEntity alloc] initWithDictionary:dictionary] autorelease];
+    return [[ShotgunEntity alloc] initWithDictionary:dictionary];
 }
 
 + (id)shotgunEntityWithJSON:(NSString *)json
@@ -94,9 +94,4 @@
     return self;
 }
 
-- (void)dealloc
-{
-    self.internal = Nil;
-    [super dealloc];
-}
 @end

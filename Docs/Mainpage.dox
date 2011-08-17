@@ -51,7 +51,8 @@ https://github.com/shotgunsoftware/python-api/wiki
    </ul>
  </li>
  </ul>
- See the example project under Examples to see what the resulting setup should look like.
+ Note, it is also possible to compile this as a library and link that into your project as a sub-project.  This is cleaner, but more difficult to setup.
+ See the example project under Examples to see what this setup would look like.
  \li To get the example project or unit tests to run you need to copy the Config.plist.template
  file to Config.plist and update the values for your shotgun server.
 
@@ -71,9 +72,9 @@ https://github.com/shotgunsoftware/python-api/wiki
   @subsection finding Finding entities
   \code
   ShotgunRequest *request = 
-    [shotgun findEntityOfType:@"Version"
-                  withFilters:@"[[\"code\", \"starts_with\", \"100\"]]"
-                    andFields:@"[\"code\", \"image\"]"];
+    [shotgun findEntitiesOfType:@"Version"
+                    withFilters:@"[[\"code\", \"starts_with\", \"100\"]]"
+                      andFields:@"[\"code\", \"image\"]"];
   [request startSynchronous];
   NSArray *results = [request response];
   \endcode
@@ -142,6 +143,15 @@ https://github.com/shotgunsoftware/python-api/wiki
   \endcode
   \code
   NSData *imageData = downloadAttachmentWithId:[NSNumber numberWithInt:201];
+  \endcode
+  \code
+  ShotgunEntity *entity = [[shotgun findEntityOfType:@"Version"
+                                         withFilters:filters
+                                           andFields:fields] startSynchronous];
+  [shotgun thumbnailForEntity:entity withBlock:^(UIImage *thumbnail) {
+        NSString *aURL = [shot objectForKey:@"image"];
+        NSLog(@"URL: %@ is %dx%d", aURL, thumbnail.size.width, thumbnail.size.height);
+  }];
   \endcode
 
   @subsection requests Using ShotgunRequest Objects
